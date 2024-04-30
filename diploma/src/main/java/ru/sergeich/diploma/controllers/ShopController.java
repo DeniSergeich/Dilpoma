@@ -26,7 +26,7 @@ public class ShopController {
             if (!plus)
                 return;
             Cart cart = new Cart(user, bouquetNumber);
-            cart.setbouquetCount(1);
+            cart.setBouquetCount(1);
             user.getList().add(cart);
             cartService.addCart(cart);
         }   else {

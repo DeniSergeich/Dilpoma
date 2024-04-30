@@ -3,7 +3,6 @@ package ru.sergeich.diploma.domain;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.validation.constraints.Size;
@@ -111,8 +110,8 @@ public class User implements UserDetails {
 
     public int getBCount(int bouquetNumber){
         for (Cart item : list){
-            if (item.getbouquetNumber() == bouquetNumber){
-                return item.getbouquetCount();
+            if (item.getBouquetNumber() == bouquetNumber){
+                return item.getBouquetCount();
             }
         }
         return 0;
@@ -120,7 +119,7 @@ public class User implements UserDetails {
 
     public Cart getB(int bouquerNumber){
         for (Cart item: list){
-            if (item.getbouquetNumber() == bouquerNumber)
+            if (item.getBouquetNumber() == bouquerNumber)
                 return item;
         }
         return null;

@@ -1,9 +1,6 @@
 package ru.sergeich.diploma.domain;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity(name = "cart")
 @Table(name = "carts")
@@ -19,11 +16,11 @@ public class Cart {
     private int bouquetNumber;
     private int bouquetCount;
 
-    public int getbouquetCount() {
+    public int getBouquetCount() {
         return bouquetCount;
     }
 
-    public void setbouquetCount(int bouquetCount) {
+    public void setBouquetCount(int bouquetCount) {
         this.bouquetCount = bouquetCount;
     }
 
@@ -143,7 +140,7 @@ public class Cart {
         this.userID = userID;
     }
 
-    public int getbouquetNumber() {
+    public int getBouquetNumber() {
         return bouquetNumber;
     }
 

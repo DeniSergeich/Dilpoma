@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
     public void sendGoods(User user, Set<Cart> carts, String totalCost){
         String mailBody = "Спасибо за заказ в нашем магазине!\nВаш заказ:\n";
         for (Cart item: carts){
-            mailBody += item.getName() + " | " + item.getPrice(false) + "/ед | " + item.getbouquetCount() + " шт. | " + item.getPrice(true) + "\n";
+            mailBody += item.getName() + " | " + item.getPrice(false) + "/ед | " + item.getBouquetCount() + " шт. | " + item.getPrice(true) + "\n";
         }
         mailBody += "Итого: " + totalCost;
         mailService.sendEmail(user.getEmail(), "Заказ оформлен!", mailBody);

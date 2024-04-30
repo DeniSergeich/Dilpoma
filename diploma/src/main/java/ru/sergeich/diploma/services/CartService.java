@@ -44,9 +44,9 @@ public class CartService {
     @Transactional
     public void changeCountOfBouquet(Cart cart, boolean plus){
         if (plus){
-            cart.setbouquetCount(cart.getbouquetCount() + 1);
+            cart.setBouquetCount(cart.getBouquetCount() + 1);
         } else
-            cart.setbouquetCount(cart.getbouquetCount() - 1);
+            cart.setBouquetCount(cart.getBouquetCount() - 1);
         cartRepository.save(cart);
     }
 }
