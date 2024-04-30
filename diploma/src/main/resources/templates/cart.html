@@ -78,7 +78,7 @@
                 </tr>
                 <tr th:each="flower : ${flowers}">
                     <td class="d-none d-md-block"><img class="img-thumbnail" style="width: 20em; height: 20em;" th:src="${flower.getPhotoAddress()}" alt="Flower photo"></td>
-                    <td class="align-middle" th:text="${flower.getName()}"></td>
+                    <td class="align-middle" th:text="${flower.getBouquetName}"></td>
                     <td class="align-middle" th:text="${flower.getPrice(false)}"></td>
                     <td class="align-middle text-center" th:text="${flower.getBouquetCount()}"></td>
                     <td class="align-middle" th:text="${flower.getPrice(true)}"></td>

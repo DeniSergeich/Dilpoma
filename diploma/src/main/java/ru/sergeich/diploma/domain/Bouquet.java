@@ -22,4 +22,3 @@ public class Bouquet {
     @ManyToMany(mappedBy = "bouquetList")
     private Set<Cart> cartList;
 }
-

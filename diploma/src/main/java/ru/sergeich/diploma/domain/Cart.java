@@ -37,81 +37,13 @@ public class Cart {
         return "bouquet_" + String.valueOf(bouquetNumber) + ".jpg";
     }
 
-    public String getPrice(boolean totalCost){
-        switch (this.bouquetNumber){
-            case 1:
-                if (totalCost)
-                    return String.valueOf(1500 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(1500) + " руб.";
-            case 2:
-                if (totalCost)
-                    return String.valueOf(1800 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(1800) + " руб.";
-            case 3:
-                if (totalCost)
-                    return String.valueOf(2300 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(2300) + " руб.";
-            case 4:
-                if (totalCost)
-                    return String.valueOf(5000 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(5000) + " руб.";
-            case 5:
-                if (totalCost)
-                    return String.valueOf(3100 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(3100) + " руб.";
-            case 6:
-                if (totalCost)
-                    return String.valueOf(2800 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(2800) + " руб.";
-            case 7:
-                if (totalCost)
-                    return String.valueOf(1900 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(1900) + " руб.";
-            case 8:
-                if (totalCost)
-                    return String.valueOf(2600 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(2600) + " руб.";
-            case 9:
-                if (totalCost)
-                    return String.valueOf(2400 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(2400) + " руб.";
-            default:
-                return "Неизвестно";
-        }
+    public String getPrice(boolean withDiscount) {
+        double totalPrice = withDiscount ? bouquetList.iterator().next().getPrice() * bouquetCount : bouquetList.iterator().next().getPrice();
+        return String.valueOf(totalPrice) + " руб.";
     }
 
-    public String getName(){
-        switch (this.bouquetNumber){
-            case 1:
-                return "Букет Микс";
-            case 2:
-                return "Букет Комплимент";
-            case 3:
-                return "Букет Свадебный";
-            case 4:
-                return "Букет Джентельмен";
-            case 5:
-                return "Букет Вьюга";
-            case 6:
-                return "Букет Джунгли";
-            case 7:
-                return "Букет Восход";
-            case 8:
-                return "Букет Стихия";
-            case 9:
-                return "Букет Удача";
-            default:
-                return "Неизвестный букет";
-        }
+    public String getBouquetName() {
+        return bouquetList.iterator().next().getName();
     }
 
     @Override
