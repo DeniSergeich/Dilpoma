@@ -16,40 +16,42 @@ import java.util.Set;
 @Table(name = "users")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class User implements UserDetails {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    private int id;
 
-    @Size(min=1, message = "Имя пользователя не может быть пустым")
+    @Size(min=2, message = "Не меньше 5 знаков")
     private String username;
-
-    @Size(min=5, message = "Пароль не может содержать менее 5 символов")
+    @Size(min=2, message = "Не меньше 5 знаков")
     private String password;
-
     @Transient
     private String passwordConfirm;
     private String email;
 
-    @OneToMany(mappedBy = "userId", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "userID", fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<Cart> list = new HashSet<Cart>();
 
-
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public User() {
     }
 
-    @Override
-    public String getPassword() {
-        return password;
+    public User(String username, String password, String passwordConfirm, String email) {
+        this.username = username;
+        this.password = password;
+        this.passwordConfirm = passwordConfirm;
+        this.email = email;
     }
 
-    @Override
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -74,10 +76,43 @@ public class User implements UserDetails {
         return true;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getBCount(int bouquetNumber){
         for (Cart item : list){
-            if (item.getBouquetNumber() == bouquetNumber){
-                return item.getBouquetCount();
+            if (item.getbouquetNumber() == bouquetNumber){
+                return item.getbouquetCount();
             }
         }
         return 0;
@@ -85,7 +120,7 @@ public class User implements UserDetails {
 
     public Cart getB(int bouquerNumber){
         for (Cart item: list){
-            if (item.getBouquetNumber() == bouquerNumber)
+            if (item.getbouquetNumber() == bouquerNumber)
                 return item;
         }
         return null;

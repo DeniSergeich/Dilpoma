@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.services.UserService;
 
@@ -48,7 +47,7 @@ public class LKController {
         }
         User changed_user = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         changed_user.setUsername(username);
-        userService.rootReSaveUser(changed_user);
+        userService.rootResaveUser(changed_user);
         return "redirect:/logout";
     }
 
@@ -75,7 +74,7 @@ public class LKController {
         }
         current_user.setPassword(newPassword);
         current_user.setPasswordConfirm(newPasswordConfirm);
-        userService.rootReSaveUserWithPassword(current_user);
+        userService.rootResaveUserWithPassword(current_user);
         return "redirect:/logout";
     }
 
@@ -92,7 +91,7 @@ public class LKController {
     public String chEmail(@ModelAttribute("email") String email, Model model){
         User current_user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         current_user.setEmail(email);
-        userService.rootReSaveUser(current_user);
+        userService.rootResaveUser(current_user);
         return "redirect:/logout";
     }
 

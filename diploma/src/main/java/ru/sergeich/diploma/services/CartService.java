@@ -1,50 +1,52 @@
 package ru.sergeich.diploma.services;
 
-import lombok.NoArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sergeich.diploma.domain.Cart;
+import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.repositoryes.CartRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
 @Service
-@NoArgsConstructor
 public class CartService {
     @Autowired
     private CartRepository cartRepository;
 
     @Transactional
-    public List<Cart> findCartsByUserId(long userId) {
-        return cartRepository.findAllByUserId(userId);
+    public List<Cart> findCartByUserID(User user){
+        return cartRepository.findAllByUserID(user);
     }
 
     @Transactional
-    public void addCart(Cart cart) {
+    public void addCart(Cart cart){
         cartRepository.save(cart);
     }
 
     @Transactional
-    public Cart findCartByUserAndBouquetNumber(long userId, int bouquetNumber) {
-        return cartRepository.findByUserIdAndBouquetNumber(userId, bouquetNumber);
+    public Cart findCartByUserAndBNumber(User user, int bouquet_number){
+        return cartRepository.findCartByUserIDAndBouquetNumber(user, bouquet_number);
     }
 
     @Transactional
-    public void deleteCart(Cart cart) {
+    public void deleteCart(Cart cart){
         cartRepository.deleteById(cart.getId());
     }
 
     @Transactional
-    public void deleteCarts(Set<Cart> cartSet) {
+    public void deleteCarts(Set<Cart> cartSet){
         cartRepository.deleteAll(cartSet);
     }
 
     @Transactional
-    public void changeCountOfBouquet(Cart cart, boolean plus) {
-        if (plus) cart.setBouquetCount(cart.getBouquetCount() + 1);
-        else cart.setBouquetCount(cart.getBouquetCount() - 1);
+    public void changeCountOfBouquet(Cart cart, boolean plus){
+        if (plus){
+            cart.setbouquetCount(cart.getbouquetCount() + 1);
+        } else
+            cart.setbouquetCount(cart.getbouquetCount() - 1);
         cartRepository.save(cart);
     }
 }

@@ -26,14 +26,14 @@ public class ShopController {
             if (!plus)
                 return;
             Cart cart = new Cart(user, bouquetNumber);
-            cart.setBouquetCount(1);
+            cart.setbouquetCount(1);
             user.getList().add(cart);
             cartService.addCart(cart);
         }   else {
             Cart cart = user.getB(bouquetNumber);
             if (user.getBCount(bouquetNumber) == 1 & !plus){
                 user.getList().remove(cart);
-                userService.rootReSaveUser(user);
+                userService.rootResaveUser(user);
                 cartService.deleteCart(cart);
             }
             else

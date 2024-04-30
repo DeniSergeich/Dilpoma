@@ -38,7 +38,7 @@ public class CartController {
         current_user.setList(list);
         model.addAttribute("infoSetting", true);
         model.addAttribute("infoMessage", "Ваша корзина успешно очищена");
-        userService.rootReSaveUser(current_user);
+        userService.rootResaveUser(current_user);
         cartService.deleteCarts(current_cart);
         return "cart";
     }
@@ -53,7 +53,7 @@ public class CartController {
         current_user.setList(list);
         model.addAttribute("infoSetting", true);
         model.addAttribute("infoMessage", "Информация о заказе отправлена на " + current_user.getEmail());
-        userService.rootReSaveUser(current_user);
+        userService.rootResaveUser(current_user);
         cartService.deleteCarts(current_cart);
         return "cart";
     }
