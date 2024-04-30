@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -17,6 +18,8 @@ public class Cart {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User userID;
+    @ManyToMany
+    private Set<Bouquet> bouquetList; // <>
 
     private int bouquetNumber;
     private int bouquetCount;

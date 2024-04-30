@@ -82,9 +82,9 @@ public class User implements UserDetails {
         return 0;
     }
 
-    public Cart getB(int bouquerNumber){
+    public Cart getB(int bouquetNumber){
         for (Cart item: list){
-            if (item.getBouquetNumber() == bouquerNumber)
+            if (item.getBouquetNumber() == bouquetNumber)
                 return item;
         }
         return null;
