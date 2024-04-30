@@ -16,7 +16,7 @@ public class Bouquet {
     private String name;
 
     private int count;
-    private int price;
+    private double price;
 
     private String description;
     @ManyToMany(mappedBy = "bouquetList")
