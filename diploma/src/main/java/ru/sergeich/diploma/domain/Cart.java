@@ -1,7 +1,12 @@
 package ru.sergeich.diploma.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Setter
+@Getter
 @Entity(name = "cart")
 @Table(name = "carts")
 public class Cart {
@@ -16,14 +21,6 @@ public class Cart {
     private int bouquetNumber;
     private int bouquetCount;
 
-    public int getBouquetCount() {
-        return bouquetCount;
-    }
-
-    public void setBouquetCount(int bouquetCount) {
-        this.bouquetCount = bouquetCount;
-    }
-
     public Cart(User userID, int bouquetNumber) {
         this.userID = userID;
         this.bouquetNumber = bouquetNumber;
@@ -31,18 +28,6 @@ public class Cart {
 
     public Cart() {
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public User getUserID() {
-        return userID;
     }
 
     public String getPhotoAddress(){
@@ -136,15 +121,4 @@ public class Cart {
                 '}';
     }
 
-    public void setUserID(User userID) {
-        this.userID = userID;
-    }
-
-    public int getBouquetNumber() {
-        return bouquetNumber;
-    }
-
-    public void setbouquetNumber(int bouquetNumber) {
-        this.bouquetNumber = bouquetNumber;
-    }
 }

@@ -16,7 +16,7 @@ import ru.sergeich.diploma.services.UserService;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+
     private UserService userService;
 
     @Bean
@@ -51,7 +51,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/**.png", "/**.gif", "/**.jpg", "favicon**");
     }
 
-    @Autowired
+
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
