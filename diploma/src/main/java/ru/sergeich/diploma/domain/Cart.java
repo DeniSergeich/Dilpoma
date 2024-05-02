@@ -18,8 +18,9 @@ public class Cart {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User userID;
-    @ManyToMany
-    private Set<Bouquet> bouquetList; // <>
+    @OneToOne
+    @JoinColumn(name = "bouquet_id")
+    private Bouquet bouquet;
 
     private int bouquetNumber;
     private int bouquetCount;
@@ -38,12 +39,12 @@ public class Cart {
     }
 
     public String getPrice(boolean withDiscount) {
-        double totalPrice = withDiscount ? bouquetList.iterator().next().getPrice() * bouquetCount : bouquetList.iterator().next().getPrice();
+        double totalPrice = withDiscount ? bouquet.getPrice() * bouquetCount : bouquet.getPrice();
         return String.valueOf(totalPrice) + " руб.";
     }
 
     public String getBouquetName() {
-        return bouquetList.iterator().next().getName();
+        return bouquet.getName();
     }
 
     @Override

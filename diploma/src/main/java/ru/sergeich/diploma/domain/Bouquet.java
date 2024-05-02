@@ -3,6 +3,7 @@ package ru.sergeich.diploma.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -12,13 +13,11 @@ public class Bouquet {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private int id;
-
     private String name;
-
     private int count;
     private double price;
-
     private String description;
-    @ManyToMany(mappedBy = "bouquetList")
-    private Set<Cart> cartList;
+
+    @OneToOne(mappedBy = "bouquet")
+    private Cart cart;
 }
