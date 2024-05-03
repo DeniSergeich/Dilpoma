@@ -1,12 +1,8 @@
 package ru.sergeich.diploma.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import ru.sergeich.diploma.repositoryes.BouquetRepository;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity(name = "cart")

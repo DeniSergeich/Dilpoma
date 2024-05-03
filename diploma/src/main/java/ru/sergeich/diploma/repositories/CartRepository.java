@@ -1,4 +1,4 @@
-package ru.sergeich.diploma.repositoryes;
+package ru.sergeich.diploma.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.sergeich.diploma.domain.Cart;
