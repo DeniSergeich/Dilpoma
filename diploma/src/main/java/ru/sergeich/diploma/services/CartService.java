@@ -50,41 +50,38 @@ public class CartService {
 
     /**
      * Обновление корзины. Добавление/удаление букета
-     * @param cartId корзина для обновления
      * @param bouquetId букет для добавления/удаления
      * @param isAdd true - добавление, false - удаление
      */
 
-    public void updateCart(Long cartId, Long bouquetId, boolean isAdd) {
-        Cart cart = getCartById(cartId);
+    public void updateCart(Cart cart, Long bouquetId, boolean isAdd) {
+
         if (isAdd) {
-            addBouquetToCart(cartId, bouquetId);
+            addBouquetToCart(cart, bouquetId);
         } else {
-            removeBouquetFromCart(cartId, bouquetId);
+            removeBouquetFromCart(cart, bouquetId);
         }
     }
 
     /**
      * Добавление букета в корзину
-     * @param cartId корзина для добавления
      * @param bouquetId букет для добавления
      */
-    public void addBouquetToCart(Long cartId, Long bouquetId) {
-        Cart cart = getCartById(cartId);
+    public void addBouquetToCart(Cart cart, Long bouquetId) {
         List <Bouquet> bouquets = cart.getBouquets();
-        bouquets.add(bouquetService.getBouquetById(bouquetId).orElseThrow(BouquetNotFoundException::new));
+        bouquets.add(bouquetService.getBouquetById(bouquetId)
+                .orElseThrow(BouquetNotFoundException::new));
         cartRepository.save(cart);
     }
 
     /**
      * Удаление букета из корзины
-     * @param cartId корзина для удаления
      * @param bouquetId букет для удаления
      */
-    public void removeBouquetFromCart(Long cartId, Long bouquetId) {
-        Cart cart = getCartById(cartId);
+    public void removeBouquetFromCart(Cart cart, Long bouquetId) {
         List <Bouquet> bouquets = cart.getBouquets();
-        bouquets.remove(bouquetService.getBouquetById(bouquetId).orElseThrow(BouquetNotFoundException::new));
+        bouquets.remove(bouquetService.getBouquetById(bouquetId)
+                .orElseThrow(BouquetNotFoundException::new));
         cartRepository.save(cart);
     }
 
