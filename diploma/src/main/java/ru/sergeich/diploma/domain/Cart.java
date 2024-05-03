@@ -17,13 +17,21 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
-    @JoinColumn(name = "bouquet_id")
+    @ManyToMany
+    @JoinTable(
+            name = "cart_bouquet",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "bouquet_id")
+    )
     private List<Bouquet> bouquets;
 
     public Cart(User user) {
         this.user = user;
     }
+
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public Cart() {
 
