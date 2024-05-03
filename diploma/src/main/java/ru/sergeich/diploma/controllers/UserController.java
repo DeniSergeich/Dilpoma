@@ -17,18 +17,6 @@ public class UserController {
     private UserService userService;
 
     /**
-     * Возвращает имя представления «lk».
-     *
-     * @param  model  объект модели для хранения атрибутов
-     * @return        имя представления "lk"
-     */
-    @GetMapping("/lk")
-    public String lk(Model model) {
-        model = addInfoAboutSession(model);
-        return "lk";
-    }
-
-    /**
      * Добавляет информацию о сеансе в данную модель.
      *
      * @param  model  модель для добавления информации о сеансе
@@ -78,7 +66,7 @@ public class UserController {
         }
         User currentUser = userService.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         currentUser.setUsername(username);
-        userService.rootResaveUser(currentUser);
+        userService.saveUser(currentUser);
         model = addInfoAboutSession(model);
         return "redirect:/logout";
     }
@@ -152,8 +140,8 @@ public class UserController {
     @PostMapping("/lk-email")
     public String confirmEmail(@ModelAttribute("email") String email, Model model) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        currentUser.setEmail(email);
-        userService.rootResaveUser(currentUser);
+        currentUser.setEmail(email.toLowerCase());
+        userService.saveUser(currentUser);
         return "redirect:/logout";
     }
 
