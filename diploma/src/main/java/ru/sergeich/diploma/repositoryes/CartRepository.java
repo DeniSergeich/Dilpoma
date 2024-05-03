@@ -6,7 +6,7 @@ import ru.sergeich.diploma.domain.User;
 
 import java.util.List;
 
-public interface CartRepository extends JpaRepository<Cart, Integer> {
+public interface CartRepository extends JpaRepository<Cart, Long> {
     List<Cart> findAllByUserID(User user);
     Cart findCartByUserIDAndBouquetNumber(User user, int bouquetNumber);
 }

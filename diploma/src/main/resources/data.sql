@@ -9,5 +9,3 @@ INSERT INTO bouquets (id, name, count, price, description) VALUES
     (8, 'Букет Стихия', 80, 2600, 'Description 8'),
     (9, 'Букет Удача', 90, 2400, 'Description 9');
 
-insert into users (id, username, password, email) values
-    (667, 'user', '$2a$10$yUyIY6fF6Zw6s3I6S7u2J.8IiCJ7FJ1r3g3ZvXp6s3GjKu3iH', 'oR9pF@example.com');

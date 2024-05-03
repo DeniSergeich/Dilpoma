@@ -7,5 +7,5 @@ import ru.sergeich.diploma.domain.Bouquet;
 import java.util.Optional;
 @Repository
 public interface BouquetRepository extends JpaRepository<Bouquet, Long> {
-    Optional<Bouquet> findById(long id);
+    Bouquet findById(int id);
 }

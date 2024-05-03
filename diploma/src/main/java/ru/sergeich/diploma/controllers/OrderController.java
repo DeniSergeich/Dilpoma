@@ -1,4 +1,4 @@
 package ru.sergeich.diploma.controllers;
 
-public class CartController {
+public class OrderController {
 }

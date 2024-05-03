@@ -2,10 +2,15 @@ package ru.sergeich.diploma.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.sergeich.diploma.repositoryes.CartRepository;
 
 @Service
-public class CartService {
+public class ShopService {
     @Autowired
-    private CartRepository cartRepository;
+    private BouquetService bouquetService;
+
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private UserService userService;
 }
