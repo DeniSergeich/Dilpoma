@@ -3,6 +3,7 @@ package ru.sergeich.diploma.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity(name = "cart")
@@ -14,16 +15,14 @@ public class Cart {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User userID;
+    private User user;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "bouquet_id")
-    private Bouquet bouquet;
+    private List<Bouquet> bouquets;
 
-    private int bouquetCount;
-
-    public Cart(User userID, int bouquetNumber) {
-        this.userID = userID;
+    public Cart(User user) {
+        this.user = user;
     }
 
     public Cart() {

@@ -33,8 +33,9 @@ public class User implements UserDetails {
     private String passwordConfirm;
     private String email;
 
-    @OneToMany(mappedBy = "userID", fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<Cart> flowerList = new HashSet<Cart>();
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
@@ -46,6 +47,7 @@ public class User implements UserDetails {
         this.password = password;
         this.passwordConfirm = passwordConfirm;
         this.email = email;
+        this.cart = new Cart(this);
     }
 
 
