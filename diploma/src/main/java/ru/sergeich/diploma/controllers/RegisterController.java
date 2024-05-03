@@ -67,7 +67,7 @@ public class RegisterController {
             return "register";
         }
         try {
-            userService.saveUser(user);
+            userService.registerUser(user);
             return "redirect:/login";
         } catch (Exception e) {
             model.addAttribute("errorSave", true);

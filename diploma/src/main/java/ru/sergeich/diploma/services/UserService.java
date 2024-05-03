@@ -20,35 +20,75 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Извлекает объект UserDetails по имени пользователя из репозитория пользователей.
+     *
+     * @param username — имя пользователя, которого требуется получить.
+     * @return объект UserDetails, представляющий пользователя
+     * @throws UsernameNotFoundException, если пользователь не найден в репозитории
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
     }
 
+    /**
+     * Извлекает пользователя из хранилища пользователей по его идентификатору.
+     *
+     * @param userId — идентификатор пользователя, которого нужно получить.
+     * @return необязательный параметр, содержащий объект User, если он найден, в противном случае пустой
+     */
     public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
     }
 
-    public User findUserByUsername(String username){
+    /**
+     * Находит пользователя в хранилище пользователей по его имени.
+     *
+     * @param username — имя пользователя, которого нужно найти.
+     * @return объект User, представляющий найденного пользователя, или значение null, если пользователь не найден
+     */
+    public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public void rootResaveUser(User user){
+    /**
+     * Сохраняет данного пользователя в хранилище пользователей.
+     *
+     * @param user — объект пользователя, который необходимо сохранить.
+     */
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 
-    public void rootResaveUserWithPassword(User user){
+    /**
+     * Шифрует пароль пользователя и сохраняет обновленный объект пользователя в базе данных.
+     *
+     * @param user — объект пользователя с паролем, который необходимо зашифровать и сохранить.
+     */
+    public void rootResaveUserWithPassword(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
-    public boolean saveUser(User user){
+    /**
+     * Регистрирует нового пользователя в системе.
+     *
+     * @param user — объект пользователя, содержащий регистрационные данные.
+     * @return void
+     * @throws UsernameNotFoundException, если имя пользователя уже существует в базе данных
+     */
+    public void registerUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
-        if (userFromDB != null){
-            return false;
+
+        if (userFromDB != null) {
+            throw new UsernameNotFoundException("User exists");
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return true;
     }
 }
