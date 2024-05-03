@@ -23,11 +23,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
 
-    @Size(min=2, message = "Не меньше 5 знаков")
+    @Size(min=1, message = "Не может быть пустым")
     private String username;
-    @Size(min=2, message = "Не меньше 5 знаков")
 
+    @Size(min=5, message = "Не меньше 5 знаков")
     private String password;
+
     @Transient
     private String passwordConfirm;
     private String email;
