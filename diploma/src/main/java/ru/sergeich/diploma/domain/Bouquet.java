@@ -21,6 +21,11 @@ public class Bouquet {
     private double price;
     private String description;
     private String image;
-
-
+    public Bouquet(@NonNull String name, int amount, double price, String description, String image) {
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+        this.description = description;
+        this.image = image;
+    }
 }
