@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "carts")
 public class Cart {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
