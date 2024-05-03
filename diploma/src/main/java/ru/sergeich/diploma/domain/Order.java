@@ -3,6 +3,7 @@ package ru.sergeich.diploma.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,11 +16,11 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    User user;
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "bouquet_id")
-    Bouquet bouquet;
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
     int count;
     double price;
