@@ -1,4 +1,4 @@
-package ru.sergeich.diploma.repositoryes;
+package ru.sergeich.diploma.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.sergeich.diploma.domain.Cart;
@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
     List<Cart> findAllByUserID(User user);
-    Cart findCartByUserIDAndBouquetNumber(User user, int bouquetNumber);
 }
