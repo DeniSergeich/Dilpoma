@@ -21,6 +21,11 @@ public class Bouquet {
     private double price;
     private String description;
     private String image;
+
+    @ManyToMany(mappedBy = "bouquets")
+    private List<Cart> carts;
+
+
     public Bouquet(@NonNull String name, int amount, double price, String description, String image) {
         this.name = name;
         this.amount = amount;
