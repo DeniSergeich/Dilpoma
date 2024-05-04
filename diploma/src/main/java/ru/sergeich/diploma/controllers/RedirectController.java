@@ -35,21 +35,6 @@ public class RedirectController {
         return "login";
     }
 
-    /**
-     * Извлекает страницу магазина на основе текущего статуса аутентификации.
-     *
-     * @return страницу магазина, если пользователь аутентифицирован, в противном случае страница shop_unregistered
-     */
-    @GetMapping("/shop")
-    public String getShop(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (!(auth instanceof AnonymousAuthenticationToken)) {
-            return "shop";
-        }
-        return "shop_unregistered";
-    }
-
     @GetMapping("/index")
     public String getHome(){
         return "index";

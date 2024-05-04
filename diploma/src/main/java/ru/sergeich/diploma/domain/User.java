@@ -36,6 +36,7 @@ public class User implements UserDetails {
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
@@ -77,6 +78,5 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
-
 
 }

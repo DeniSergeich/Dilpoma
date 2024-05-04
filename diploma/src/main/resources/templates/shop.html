@@ -62,178 +62,25 @@
 <!--MAIN-->
 <main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;">
     <h1 class="text-center">Букеты от мастеров</h1>
-    <div class="container mt-4 min-vh-100">
-        <div class="d-flex flex-row flex-wrap justify-content-md-between justify-content-center">
+    <div class="card-deck">
+        <div class="card" th:each="bouquet : ${bouquets}">
+            <img th:src="${bouquet.imageUrl}" class="card-img-top" alt="bouquet_2">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${bouquet.name}"></h5>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${bouquet.master}"></h6>
+                <p class="card-text" th:text="${bouquet.description}"></p>
 
-            <div class="mb-3" id="b1">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_1.jpg" class="card-img-top" alt="bouquet_1">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Микс</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Анастасия</h6>
-                        <p class="card-text">Цветы всех времен и народов замиксованы для того, чтобы порадовать вашу вторую половинку.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b1">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(1)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b1">+</a>
-                            <button type="button" disabled class="btn btn-success">4390 руб.</button>
-                        </div>
-
-                    </div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" th:href="@{/rem_bouquet/{id}(id=${bouquet.id})}" th:if="${#authentication.getPrincipal().getBCount(bouquet.id) > 0}">-</a>
+                    <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(bouquet.id)}" th:if="${#authentication.getPrincipal().getBCount(bouquet.id) == 0}"></button>
+                    <a role="button" class="btn btn-secondary" th:href="@{/add_bouquet/{id}(id=${bouquet.id})}" th:unless="${#authentication.getPrincipal().username == 'anonymousUser'}">+</a>
+                    <a role="button" class="btn btn-secondary" th:href="@{/registration}" th:if="${#authentication.getPrincipal().username == 'anonymousUser'}">+</a>
+                    <button type="button" disabled class="btn btn-success" th:text="${bouquet.price}"></button>
                 </div>
-            </div>
 
-            <div class="mb-3" id="b2">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_2.jpg" class="card-img-top" alt="bouquet_2">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Комплимент</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Елена</h6>
-                        <p class="card-text">Коллега на работе помогла просто так? Это повод подарить ей букетик, как жест доброй воли.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b2">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(2)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b2">+</a>
-                            <button type="button" disabled class="btn btn-success">2980 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b3">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_3.jpg" class="card-img-top" alt="bouquet_3">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Свадебный</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Анастасия</h6>
-                        <p class="card-text">Все так быстро завертелось, закрутилось. Завтра свадьба, а лаконичного букета нет? Это предложение для вас.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b3">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(3)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b3">+</a>
-                            <button type="button" disabled class="btn btn-success">5710 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b4">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_4.jpg" class="card-img-top" alt="bouquet_1">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Джентельмен</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Анастасия</h6>
-                        <p class="card-text">Вы человек с деньгами, уважением, честью. Докажите, что вы джентельмен, подарив этот безукоризнненный букет.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b4">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(4)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b4">+</a>
-                            <button type="button" disabled class="btn btn-success">2990 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b5">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_5.jpg" class="card-img-top" alt="bouquet_2">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Вьюга</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Ксения</h6>
-                        <p class="card-text">Сердце вашей второй половинки холодно как никогда? У нас есть решение! Данный букет растопит ее сердечко.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b5">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(5)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b5">+</a>
-                            <button type="button" disabled class="btn btn-success">3090 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b6">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_6.jpg" class="card-img-top" alt="bouquet_3">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Джунгли</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Елена</h6>
-                        <p class="card-text">Жарко, страстно и опасно. Эти слова про вашу женщину? Букет данной серии будет горячо ею принят.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b6">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(6)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b6">+</a>
-                            <button type="button" disabled class="btn btn-success">2160 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b7">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_7.jpg" class="card-img-top" alt="bouquet_1">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Восход</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Ксения</h6>
-                        <p class="card-text">Хотите, чтобы ваша женщина светилась также, как солнце на восходе? Мы знаем, что вам нужно.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b7">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(7)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b7">+</a>
-                            <button type="button" disabled class="btn btn-success">4040 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3" id="b8">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_8.jpg" class="card-img-top" alt="bouquet_2">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Стихия</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Анастасия</h6>
-                        <p class="card-text">Из крайности в крайность, разрушительна и радикальна? Данный букет уcмирит ее стихию, даже не сомневайтесь!</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b8">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(8)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b8">+</a>
-                            <button type="button" disabled class="btn btn-success">4300 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3" id="b9">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_9.jpg" class="card-img-top" alt="bouquet_3">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Удача</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Елена</h6>
-                        <p class="card-text">Не знаете, что выбрать? Бегаете от одного букета к другому? Предоставьте выбор нам, вы не пожалеете!</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b9">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(9)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b9">+</a>
-                            <button type="button" disabled class="btn btn-success">3840 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
     </div>
 </main>
 
