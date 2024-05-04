@@ -79,4 +79,9 @@ public class User implements UserDetails {
         return null;
     }
 
+    public int getBCount(Long bouquetId) {
+        return (int) orders.get(1).getCount();
+    }
+
+
 }
