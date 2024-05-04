@@ -80,7 +80,7 @@ public class User implements UserDetails {
     }
 
     public int getBCount(Long bouquetId) {
-        return (int) orders.get(1).getCount();
+        return (int) cart.getBouquets().stream().filter(b -> b.getId().equals(bouquetId)).count();
     }
 
 

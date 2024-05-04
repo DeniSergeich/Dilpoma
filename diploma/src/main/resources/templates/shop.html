@@ -70,17 +70,17 @@
                     <h5 class="card-title" th:text="${bouquet.name}"></h5>
                     <p class="card-text" th:text="${bouquet.description}"></p>
 
-<!--                <div class="btn-group" role="group" aria-label="Basic example">-->
-<!--                    <a role="button" class="btn btn-secondary" th:href="@{/rem_bouquet/{id}(id=${bouquet.id})}" th:if="${#authentication.getPrincipal().getBCount(bouquet.id) > 0}">-</a>-->
-<!--                    <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(bouquet.id)}" th:if="${#authentication.getPrincipal().getBCount(bouquet.id) == 0}"></button>-->
-<!--                    <a role="button" class="btn btn-secondary" th:href="@{/add_bouquet/{id}(id=${bouquet.id})}" th:unless="${#authentication.getPrincipal().username == 'anonymousUser'}">+</a>-->
-<!--                    <a role="button" class="btn btn-secondary" th:href="@{/registration}" th:if="${#authentication.getPrincipal().username == 'anonymousUser'}">+</a>-->
-<!--                    <button type="button" disabled class="btn btn-success" th:text="${bouquet.price}"></button>-->
-<!--                </div>-->
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a role="button" class="btn btn-secondary" th:href="@{/rem_bouquet/{id}(id=${bouquet.id})}" th:unless="${#authentication.getPrincipal().cart == null or #authentication.getPrincipal().getBCount(bouquet.id) == 0}">-</a>
+                        <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().cart == null ? '0' : #authentication.getPrincipal().getBCount(bouquet.id)}"></button>
+                        <a role="button" class="btn btn-secondary" th:href="@{/add_bouquet/{id}(id=${bouquet.id})}" th:unless="${#authentication.getPrincipal().username == 'anonymousUser'}">+</a>
+                        <a role="button" class="btn btn-secondary" th:href="@{/registration}" th:if="${#authentication.getPrincipal().username == 'anonymousUser'}">+</a>
+                        <button type="button" disabled class="btn btn-success" th:text="${bouquet.price}"></button>
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </main>
 
