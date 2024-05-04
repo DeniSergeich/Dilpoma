@@ -1,13 +1,23 @@
 package ru.sergeich.diploma.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.sergeich.diploma.domain.Bouquet;
+import ru.sergeich.diploma.domain.User;
+import ru.sergeich.diploma.services.BouquetService;
+
+import java.util.List;
 
 @Controller
 public class RedirectController {
+    @Autowired
+    private BouquetService bouquetService;
 
     @GetMapping("/contacts")
     public String getContacts() {
@@ -48,6 +58,20 @@ public class RedirectController {
     @GetMapping("/lk")
     public String getLk(){
         return "lk";
+    }
+
+    @GetMapping("/shop")
+    public String getShop(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            List<Bouquet> bouquets = bouquetService.getAllBouquets();
+            model.addAttribute("bouquets", bouquets);
+            return "shop";
+        }
+        List<Bouquet> bouquets = bouquetService.getAllBouquets();
+        model.addAttribute("bouquets", bouquets);
+        return "shop-unregistered";
     }
 
 }

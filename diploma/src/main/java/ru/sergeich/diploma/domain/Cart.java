@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,7 +19,7 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "cart_bouquet",
             joinColumns = @JoinColumn(name = "cart_id"),
@@ -28,6 +29,7 @@ public class Cart {
 
     public Cart(User user) {
         this.user = user;
+        this.bouquets = new ArrayList<>();
     }
 
     @OneToOne

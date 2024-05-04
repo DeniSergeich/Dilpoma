@@ -21,6 +21,7 @@ public class CartService {
 
 
     public Cart createCart(User user) {
+        user.setCart(new Cart(user));
         return cartRepository.save(new Cart(user));
     }
 
@@ -50,7 +51,13 @@ public class CartService {
      * @param isAdd true - добавление, false - удаление
      */
 
-    public void updateCart(Cart cart, Long bouquetId, boolean isAdd) {
+    public void updateCart(User user, Long bouquetId, boolean isAdd) {
+        Cart cart = user.getCart();
+        if (cart == null) {
+            cart = createCart(user);
+            user.setCart(cart);
+            userService.saveUser(user);
+        }
 
         if (isAdd) {
             addBouquetToCart(cart, bouquetId);
