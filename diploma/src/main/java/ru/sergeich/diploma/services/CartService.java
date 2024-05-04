@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
+import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.exceptions.*;
 import ru.sergeich.diploma.repositories.CartRepository;
 
@@ -18,14 +19,9 @@ public class CartService {
     @Autowired
     private BouquetService bouquetService;
 
-    /**
-     * Создание корзины. С привязкой к пользователю
-     * @param userId пользователь, которому будет привязана корзина
-     */
-    public void createCart(Long userId) {
-        cartRepository.save(new Cart(
-                userService.getUserById(userId)
-                        .orElseThrow(UserNotFoundException::new)));
+
+    public Cart createCart(User user) {
+        return cartRepository.save(new Cart(user));
     }
 
     /**
@@ -99,4 +95,11 @@ public class CartService {
     }
 
 
+    public Cart getCartByUser(User currentUser) {
+        return cartRepository.findByUser(currentUser);
+    }
+
+    public Cart saveCart(Cart cart) {
+        return cartRepository.save(cart);
+    }
 }
