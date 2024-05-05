@@ -62,7 +62,9 @@
 <!--MAIN-->
 <main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;">
     <div class="row min-vh-100">
+        <div class="text-center">
         <h1>Корзина</h1>
+        </div>
         <div th:if="${infoSetting}">
             <div class="alert alert-success" th:text="${infoMessage}">
             </div>
@@ -94,7 +96,7 @@
             </div>
         </div>
 
-        <div th:if="${#authentication.getPrincipal().getAllTotalCost()} == 0">
+        <div th:if="${#authentication.getPrincipal().getAllTotalCost()} == 0" class="text-center">
             <h3>Ваша корзина пуста</h3>
         </div>
     </div>
