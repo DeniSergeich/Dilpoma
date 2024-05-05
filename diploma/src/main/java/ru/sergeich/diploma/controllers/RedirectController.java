@@ -79,8 +79,8 @@ public class RedirectController {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Cart cart = user.getCart();
-        List<Bouquet> bouquets = cart.getBouquets();
-        model.addAttribute("bouquets", bouquets);
+//        List<Bouquet> bouquets = cart.getBouquets();
+//        model.addAttribute("bouquets", bouquets);
         model.addAttribute("cart", cart);
         return "cart";
 

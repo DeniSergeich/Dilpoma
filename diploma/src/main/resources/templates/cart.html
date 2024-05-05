@@ -76,7 +76,7 @@
                     <th>Количество</th>
                     <th>Стоимость</th>
                 </tr>
-                <tr th:each="bouquet : ${bouquets}" th:if="${cart.countBouquetsById(bouquet.id) > 0}">
+                <tr th:each="bouquet : ${cart.bouquets}" th:if="${cart.countBouquetsById(bouquet.id) > 0}">
                     <td class="d-none d-md-block"><img class="img-thumbnail" style="width: 20em; height: 20em;" th:src="${bouquet.image}" alt="Bouquet photo"></td>
                     <td class="align-middle" th:text="${bouquet.name}"></td>
                     <td class="align-middle" th:text="${bouquet.price}"></td>
@@ -85,7 +85,6 @@
                 </tr>
             </table>
 
-            <!-- Rest of the code -->
 
 
             <div class="btn-group" role="group" aria-label="Basic example">
