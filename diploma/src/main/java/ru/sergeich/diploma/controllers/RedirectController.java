@@ -12,6 +12,8 @@ import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.services.BouquetService;
+import ru.sergeich.diploma.services.CartService;
+import ru.sergeich.diploma.services.UserService;
 
 import java.util.List;
 
@@ -19,6 +21,10 @@ import java.util.List;
 public class RedirectController {
     @Autowired
     private BouquetService bouquetService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/contacts")
     public String getContacts() {
@@ -61,20 +67,9 @@ public class RedirectController {
         return "lk";
     }
 
-    @GetMapping("/shop")
-    public String getShop(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (!(auth instanceof AnonymousAuthenticationToken)) {
-            User user = (User) auth.getPrincipal();
-            user.setCart(new Cart(user));
-            List<Bouquet> bouquets = bouquetService.getAllBouquets();
-            model.addAttribute("bouquets", bouquets);
-            return "shop";
-        }
-        List<Bouquet> bouquets = bouquetService.getAllBouquets();
-        model.addAttribute("bouquets", bouquets);
-        return "shop-unregistered";
+    @GetMapping("/redirect")
+    public String redirect() {
+        return "redirect:/shop";
     }
     @GetMapping("/cart")
     public String getCart(Model model) {

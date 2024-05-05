@@ -1,5 +1,6 @@
 package ru.sergeich.diploma.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,7 @@ import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.repositories.UserRepository;
 
 import java.util.Optional;
-
+@Slf4j
 @Service
 public class UserService implements UserDetailsService {
 
@@ -65,6 +66,7 @@ public class UserService implements UserDetailsService {
      */
     public void saveUser(User user) {
         userRepository.save(user);
+        log.info("User {} saved", user.getUsername() + "с корзиной " + user.getCart().getId());
     }
 
     /**
