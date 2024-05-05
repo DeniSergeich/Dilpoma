@@ -1,5 +1,6 @@
 package ru.sergeich.diploma.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,7 +19,7 @@ import ru.sergeich.diploma.services.UserService;
 import ru.sergeich.diploma.exceptions.BouquetNotFoundException;
 
 import java.util.List;
-
+@Slf4j
 @Controller
 public class ShopController {
 
@@ -46,4 +47,31 @@ public class ShopController {
         cartService.updateCart(user, bouquetId, false);
         return "redirect:/shop";
     }
+    @GetMapping("/shop")
+    public String getShop(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            User user = (User) auth.getPrincipal();
+            log.info("User: {}", user.getId());
+
+            if(user.getCart() == null) {
+                log.info("User's cart is null");
+                user.setCart(cartService.createCart(user));
+                userService.saveUser(user);
+            }
+
+            Cart cart = cartService.getCartByUser(user);
+            log.info("Cart: {} User: {}", cart.getId(), user.getId());
+
+            model.addAttribute("cart", cart);
+            List<Bouquet> bouquets = bouquetService.getAllBouquets();
+            model.addAttribute("bouquets", bouquets);
+            return "shop";
+        }
+        List<Bouquet> bouquets = bouquetService.getAllBouquets();
+        model.addAttribute("bouquets", bouquets);
+        return "shop-unregistered";
+    }
+
 }
