@@ -67,7 +67,7 @@
             <div class="alert alert-success" th:text="${infoMessage}">
             </div>
         </div>
-        <div th:if="${#authentication.getPrincipal().getAllTotalCost()} != '0 руб.'" class="table-responsive-sm">
+        <div th:if="${#authentication.getPrincipal().getAllTotalCost()} != 0" class="table-responsive-sm">
             <table class="table table-hover">
                 <tr>
                     <th class="d-none d-md-block">Фото</th>
@@ -79,9 +79,9 @@
                 <tr th:each="bouquet : ${cart.bouquets}" th:if="${cart.countBouquetsById(bouquet.id) > 0}">
                     <td class="d-none d-md-block"><img class="img-thumbnail" style="width: 20em; height: 20em;" th:src="${bouquet.image}" alt="Bouquet photo"></td>
                     <td class="align-middle" th:text="${bouquet.name}"></td>
-                    <td class="align-middle" th:text="${bouquet.price}"></td>
+                    <td class="align-middle" th:text="${bouquet.price} + ' руб.'"></td>
                     <td class="align-middle text-center" th:text="${cart.countBouquetsById(bouquet.id)}"></td>
-                    <td class="align-middle" th:text="${bouquet.price * cart.countBouquetsById(bouquet.id)}"></td>
+                    <td class="align-middle" th:text="${bouquet.price * cart.countBouquetsById(bouquet.id) + ' руб.'}"></td>
                 </tr>
             </table>
 
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div th:if="${#authentication.getPrincipal().getAllTotalCost()} == '0 руб.'">
+        <div th:if="${#authentication.getPrincipal().getAllTotalCost()} == 0">
             <h3>Ваша корзина пуста</h3>
         </div>
     </div>
