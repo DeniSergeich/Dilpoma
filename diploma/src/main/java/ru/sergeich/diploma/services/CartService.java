@@ -1,5 +1,6 @@
 package ru.sergeich.diploma.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sergeich.diploma.domain.Bouquet;
@@ -9,7 +10,7 @@ import ru.sergeich.diploma.exceptions.*;
 import ru.sergeich.diploma.repositories.CartRepository;
 
 import java.util.List;
-
+@Slf4j
 @Service
 public class CartService {
     @Autowired
@@ -67,24 +68,31 @@ public class CartService {
     }
 
     /**
-     * Добавление букета в корзину
-     * @param bouquetId букет для добавления
+     * Обновление корзины. Добавление/удаление букета
+     * @param cart корзина
+     * @param bouquetId букет для добавления/удаления
      */
     public void addBouquetToCart(Cart cart, Long bouquetId) {
         List <Bouquet> bouquets = cart.getBouquets();
         bouquets.add(bouquetService.getBouquetById(bouquetId)
                 .orElseThrow(BouquetNotFoundException::new));
         cartRepository.save(cart);
+        log.info("Добавлен букет в корзину");
     }
 
     /**
      * Удаление букета из корзины
-     * @param bouquetId букет для удаления
+     * @param cart корзина
+     * @param bouquetId ид букета для удаления
      */
     public void removeBouquetFromCart(Cart cart, Long bouquetId) {
         List <Bouquet> bouquets = cart.getBouquets();
-        bouquets.remove(bouquetService.getBouquetById(bouquetId)
-                .orElseThrow(BouquetNotFoundException::new));
+        Bouquet bouquet = bouquetService.getBouquetById(bouquetId)
+                .orElseThrow(BouquetNotFoundException::new);
+        boolean result = bouquets.remove(bouquet);
+        if (result) log.info("Удален букет из корзины");
+        else log.info("Букет не был удален из корзины");
+
         cartRepository.save(cart);
     }
 
@@ -99,14 +107,29 @@ public class CartService {
         bouquets.clear();
         cart.setBouquets(bouquets);
         cartRepository.save(cart);
+        log.info("Корзина очищена");
     }
+
+    /**
+     * Получение корзины по пользователю
+     * @param currentUser пользователь
+     * @return корзина
+     */
 
 
     public Cart getCartByUser(User currentUser) {
         return cartRepository.findByUser(currentUser);
     }
 
+    /**
+     * Сохранение корзины
+     * @param cart корзина
+     * @return сохраненная корзина
+     */
+
     public Cart saveCart(Cart cart) {
         return cartRepository.save(cart);
     }
+
+
 }

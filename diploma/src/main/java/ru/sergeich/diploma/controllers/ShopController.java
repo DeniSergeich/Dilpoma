@@ -30,27 +30,20 @@ public class ShopController {
     @Autowired
     private CartService cartService;
 
-//    public ShopController(BouquetService bouquetService) {
-//        this.bouquetService = bouquetService;
-//    }
 
-//    @GetMapping("/shop")
-//    public String getShop(Model model) {
-////        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-////
-////        if (auth instanceof AnonymousAuthenticationToken) {
-////            return "redirect:/login";
-////        }
-//
-//        List<Bouquet> bouquets = bouquetService.getAllBouquets();
-//        model.addAttribute("bouquets", bouquets);
-//        return "shop";
-//    }
+
     
     @GetMapping("/add_bouquet/{bouquetId}")
     public String addB(@PathVariable Long bouquetId){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         cartService.updateCart(user, bouquetId, true);
+        return "redirect:/shop";
+    }
+
+    @GetMapping("/rem_bouquet/{bouquetId}")
+    public String removeB(@PathVariable Long bouquetId){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        cartService.updateCart(user, bouquetId, false);
         return "redirect:/shop";
     }
 }

@@ -39,4 +39,21 @@ public class Cart {
     public Cart() {
 
     }
+
+    public int countBouquetsById(Long bouquetId) {
+        return (int) this.bouquets.stream()
+                .filter(b -> b.getId().equals(bouquetId))
+                .count();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", user=" + user +
+                ", bouquets=" + bouquets +
+                '}';
+    }
+
 }

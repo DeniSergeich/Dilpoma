@@ -22,7 +22,7 @@ public class Bouquet {
     private String description;
     private String image;
 
-    @ManyToMany(mappedBy = "bouquets")
+    @ManyToMany(mappedBy = "bouquets", fetch = FetchType.EAGER)
     private List<Cart> carts;
 
 
@@ -33,4 +33,23 @@ public class Bouquet {
         this.description = description;
         this.image = image;
     }
+    @Override
+    public String toString() {
+        return "Bouquet{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if(obj == null || getClass() != obj.getClass())
+            return false;
+        Bouquet other = (Bouquet) obj;
+        if(id == null) {
+            return other.id == null;
+        } else return id.equals(other.id);
+    }
+
 }
