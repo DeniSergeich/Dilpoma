@@ -71,16 +71,6 @@ public class RedirectController {
     public String redirect() {
         return "redirect:/shop";
     }
-    @GetMapping("/cart")
-    public String getCart(Model model) {
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Cart cart = user.getCart();
-//        List<Bouquet> bouquets = cart.getBouquets();
-//        model.addAttribute("bouquets", bouquets);
-        model.addAttribute("cart", cart);
-        return "cart";
-
-    }
 
 }
