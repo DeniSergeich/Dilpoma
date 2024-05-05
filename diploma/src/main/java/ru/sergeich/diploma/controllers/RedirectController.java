@@ -66,6 +66,8 @@ public class RedirectController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(auth instanceof AnonymousAuthenticationToken)) {
+            User user = (User) auth.getPrincipal();
+            user.setCart(new Cart(user));
             List<Bouquet> bouquets = bouquetService.getAllBouquets();
             model.addAttribute("bouquets", bouquets);
             return "shop";
