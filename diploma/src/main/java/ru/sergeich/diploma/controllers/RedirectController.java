@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.sergeich.diploma.domain.Bouquet;
+import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.services.BouquetService;
 
@@ -72,6 +73,17 @@ public class RedirectController {
         List<Bouquet> bouquets = bouquetService.getAllBouquets();
         model.addAttribute("bouquets", bouquets);
         return "shop-unregistered";
+    }
+    @GetMapping("/cart")
+    public String getCart(Model model) {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Cart cart = user.getCart();
+        List<Bouquet> bouquets = cart.getBouquets();
+        model.addAttribute("bouquets", bouquets);
+        model.addAttribute("cart", cart);
+        return "cart";
+
     }
 
 }

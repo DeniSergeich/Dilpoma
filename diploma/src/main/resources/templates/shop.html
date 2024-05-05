@@ -60,7 +60,7 @@
 </nav>
 
 <!--MAIN-->
-<main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;" th:if="${#authentication.getPrincipal() != null}">
+<main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;">
     <h1 class="text-center">Букеты от мастеров</h1>
     <div class="row justify-content-around">
         <div class="col-md-3 mb-3" th:each="bouquet : ${bouquets}">
@@ -71,8 +71,8 @@
                     <p class="card-text" th:text="${bouquet.description}"></p>
 
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a role="button" class="btn btn-secondary" th:href="@{/rem_bouquet/{id}(id=${bouquet.id})}" th:unless="${#authentication.getPrincipal() != null}">-</a>
-<!--                        <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(bouquet.id)}"></button>-->
+                        <a role="button" class="btn btn-secondary" th:href="@{/rem_bouquet/{id}(id=${bouquet.id})}">-</a>
+                        <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(bouquet.id)}"></button>
                         <a role="button" class="btn btn-secondary" th:href="@{/add_bouquet/{id}(id=${bouquet.id})}">+</a>
                         <button type="button" disabled class="btn btn-success" th:text="${bouquet.price}"></button>
                     </div>

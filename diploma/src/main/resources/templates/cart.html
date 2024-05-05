@@ -76,18 +76,21 @@
                     <th>Количество</th>
                     <th>Стоимость</th>
                 </tr>
-                <tr th:each="flower : ${flowers}">
-                    <td class="d-none d-md-block"><img class="img-thumbnail" style="width: 20em; height: 20em;" th:src="${flower.getPhotoAddress()}" alt="Flower photo"></td>
-                    <td class="align-middle" th:text="${flower.getBouquetName}"></td>
-                    <td class="align-middle" th:text="${flower.getPrice(false)}"></td>
-                    <td class="align-middle text-center" th:text="${flower.getBouquetCount()}"></td>
-                    <td class="align-middle" th:text="${flower.getPrice(true)}"></td>
+                <tr th:each="bouquet : ${bouquets}" th:if="${cart.countBouquetsById(bouquet.id) > 0}">
+                    <td class="d-none d-md-block"><img class="img-thumbnail" style="width: 20em; height: 20em;" th:src="${bouquet.image}" alt="Bouquet photo"></td>
+                    <td class="align-middle" th:text="${bouquet.name}"></td>
+                    <td class="align-middle" th:text="${bouquet.price}"></td>
+                    <td class="align-middle text-center" th:text="${cart.countBouquetsById(bouquet.id)}"></td>
+                    <td class="align-middle" th:text="${bouquet.price * cart.countBouquetsById(bouquet.id)}"></td>
                 </tr>
             </table>
 
+            <!-- Rest of the code -->
+
+
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a role="button" class="btn btn-secondary" href="/cart-clear">Очистить</a>
-                <a role="button" class="btn btn-secondary" href="/cart-order">Заказать</a>
+                <a role="button" class="btn btn-secondary" href="/cart/clear">Очистить</a>
+                <a role="button" class="btn btn-secondary" href="/cart/order">Заказать</a>
                 <button type="button" disabled class="btn btn-success" th:text="${#authentication.getPrincipal().getAllTotalCost()}"></button>
             </div>
         </div>

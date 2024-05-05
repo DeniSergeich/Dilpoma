@@ -82,6 +82,16 @@ public class User implements UserDetails {
     public int getBCount(Long bouquetId) {
         return (int) cart.getBouquets().stream().filter(b -> b.getId().equals(bouquetId)).count();
     }
+    public int getAllTotalCost(){
+        return (int) cart.getBouquets().stream().mapToDouble(Bouquet::getPrice).sum();
+    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\''+
+                '}';
+    }
 
 
 }
