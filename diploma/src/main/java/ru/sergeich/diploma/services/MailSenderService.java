@@ -12,7 +12,7 @@ public class MailSenderService {
 
     private final JavaMailSender mailSender;
 
-    @Value("${MAIL_USERNAME}")
+    @Value("${spring.mail.username}")
     private String from;
 
     public void sendMail(String to, String subject, String text) {
