@@ -10,4 +10,15 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     List<Cart> findAllByUserId(User user);
 
     Cart findByUser(User currentUser);
+
+
+    default void deleteCartById(Long id) {
+        Cart cart = findById(id).orElse(null);
+        assert cart != null;
+        User user = cart.getUser();
+        user.setCart(null);
+        cart.setUser(null);
+        cart.setBouquets(null);
+        delete(cart);
+    }
 }

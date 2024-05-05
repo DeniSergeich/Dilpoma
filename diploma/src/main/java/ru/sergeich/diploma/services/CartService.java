@@ -108,6 +108,8 @@ public class CartService {
         cart.setBouquets(bouquets);
         cartRepository.save(cart);
         log.info("Корзина очищена");
+//        cartRepository.deleteCartById(cartId);
+//        log.info("Корзина удалена");
     }
 
     /**
@@ -130,6 +132,7 @@ public class CartService {
     public Cart saveCart(Cart cart) {
         return cartRepository.save(cart);
     }
+
 
 
 }

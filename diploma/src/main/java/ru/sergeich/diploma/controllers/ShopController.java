@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,30 +49,27 @@ public class ShopController {
         return "redirect:/shop";
     }
     @GetMapping("/shop")
-    public String getShop(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    public String getShop(@AuthenticationPrincipal User user, Model model) {
+        if (user != null ) {
 
-        if (!(auth instanceof AnonymousAuthenticationToken)) {
-            User user = (User) auth.getPrincipal();
-            log.info("User: {}", user.getId());
-
-            if(user.getCart() == null) {
-                log.info("User's cart is null");
-                user.setCart(cartService.createCart(user));
-                userService.saveUser(user);
-            }
-
-            Cart cart = cartService.getCartByUser(user);
+            updateUserCart(user);
+            Cart cart = cartService.getCartById(user.getCart().getId());
             log.info("Cart: {} User: {}", cart.getId(), user.getId());
-
             model.addAttribute("cart", cart);
-            List<Bouquet> bouquets = bouquetService.getAllBouquets();
-            model.addAttribute("bouquets", bouquets);
-            return "shop";
         }
+
         List<Bouquet> bouquets = bouquetService.getAllBouquets();
         model.addAttribute("bouquets", bouquets);
-        return "shop-unregistered";
+
+        return (user != null) ? "shop" : "shop-unregistered";
+    }
+
+    private void updateUserCart(User user) {
+        if (user.getCart() == null) {
+            log.info("User's cart is null");
+            user.setCart(cartService.createCart(user));
+            userService.saveUser(user);
+        }
     }
 
 }
