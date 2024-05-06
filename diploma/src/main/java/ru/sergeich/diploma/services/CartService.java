@@ -19,6 +19,8 @@ public class CartService {
     private UserService userService;
     @Autowired
     private BouquetService bouquetService;
+    @Autowired
+    private AuthService authService;
 
 
     public Cart createCart(User user) {
@@ -65,6 +67,8 @@ public class CartService {
         } else {
             removeBouquetFromCart(cart, bouquetId);
         }
+        authService.updateAuthentication(user);
+
     }
 
     /**
@@ -107,6 +111,7 @@ public class CartService {
         bouquets.clear();
         cart.setBouquets(bouquets);
         cartRepository.save(cart);
+        authService.updateAuthentication(cart.getUser());
         log.info("Корзина очищена");
 //        cartRepository.deleteCartById(cartId);
 //        log.info("Корзина удалена");

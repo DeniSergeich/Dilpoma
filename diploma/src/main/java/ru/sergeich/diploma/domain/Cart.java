@@ -45,8 +45,8 @@ public class Cart {
                 .filter(b -> b.getId().equals(bouquetId))
                 .count();
     }
-    public int getBCount(Long bouquetId) {
-        return (int) this.getBouquets().stream().filter(b -> b.getId().equals(bouquetId)).count();
+    public int getBCount() {
+        return (int) this.bouquets.size();
     }
 
 

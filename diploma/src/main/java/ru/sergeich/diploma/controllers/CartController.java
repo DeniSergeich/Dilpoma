@@ -1,8 +1,10 @@
 package ru.sergeich.diploma.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,7 @@ import ru.sergeich.diploma.services.UserService;
 
 import java.util.List;
 
-
+@Slf4j
 @Controller
 public class CartController {
 @Autowired
@@ -26,11 +28,13 @@ public class CartController {
     private UserService userService;
 
 @GetMapping("/cart")
-    public String getCart(Model model) {
+    public String getCart(@AuthenticationPrincipal User user, Model model) {
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Cart cart = cartService.getCartById(user.getCart().getId());
-        model.addAttribute("cart", cart);
+    updateUserCart(user);
+    Cart cart = cartService.getCartById(user.getCart().getId());
+    log.info("Cart: {} User: {}", cart.getId(), user.getId());
+    model.addAttribute("cart", cart);
+
         return "cart";
 
     }
@@ -38,12 +42,19 @@ public class CartController {
 
 
     @GetMapping("/cart/clear")
-    public String clearCart(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String clearCart(@AuthenticationPrincipal User user,Model model) {
         cartService.clearCart(user.getCart().getId());
         Cart updatedCart = cartService.getCartById(user.getCart().getId());
         model.addAttribute("cart", updatedCart);
+        log.info("Model cart: {}", model.getAttribute("cart"));
         return "redirect:/cart";
+    }
+    private void updateUserCart(User user) {
+        if (user.getCart() == null) {
+            log.info("User's cart is null");
+            user.setCart(cartService.createCart(user));
+            userService.saveUser(user);
+        }
     }
 
 
