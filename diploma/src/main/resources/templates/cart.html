@@ -69,7 +69,7 @@
             <div class="alert alert-success" th:text="${infoMessage}">
             </div>
         </div>
-        <div th:if="${#authentication.getPrincipal().getAllTotalCost()} != 0" class="table-responsive-sm">
+        <div th:if="${cart.getBCount() > 0}" class="table-responsive-sm">
             <table class="table table-hover">
                 <tr>
                     <th class="d-none d-md-block">Фото</th>
@@ -92,11 +92,11 @@
             <div class="btn-group" role="group" aria-label="Basic example">
                 <a role="button" class="btn btn-secondary" href="/cart/clear">Очистить</a>
                 <a role="button" class="btn btn-secondary" href="/cart/order">Заказать</a>
-                <button type="button" disabled class="btn btn-success" th:text="${#authentication.getPrincipal().getAllTotalCost()}"></button>
+                <button type="button" disabled class="btn btn-success" th:text="${cart.getBCount()}"></button>
             </div>
         </div>
 
-        <div th:if="${#authentication.getPrincipal().getAllTotalCost()} == 0" class="text-center">
+        <div th:if="${cart.getBCount() == 0}" class="text-center">
             <h3>Ваша корзина пуста</h3>
         </div>
     </div>

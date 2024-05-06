@@ -72,7 +72,7 @@
 
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a role="button" class="btn btn-secondary" th:href="@{/rem_bouquet/{id}(id=${bouquet.id})}">-</a>
-                        <button type="button" disabled class="btn btn-secondary" th:text="${cart.getBCount(bouquet.id)}"></button>
+                        <button type="button" disabled class="btn btn-secondary" th:text="${cart.countBouquetsById(bouquet.id)}"></button>
                         <a role="button" class="btn btn-secondary" th:href="@{/add_bouquet/{id}(id=${bouquet.id})}">+</a>
                         <button type="button" disabled class="btn btn-success" th:text="${bouquet.price}"></button>
                     </div>
