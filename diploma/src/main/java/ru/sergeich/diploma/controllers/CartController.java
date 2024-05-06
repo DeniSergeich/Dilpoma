@@ -1,5 +1,6 @@
 package ru.sergeich.diploma.controllers;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
+import ru.sergeich.diploma.domain.Order;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.services.CartService;
+import ru.sergeich.diploma.services.MailSenderService;
+import ru.sergeich.diploma.services.OrderService;
 import ru.sergeich.diploma.services.UserService;
 
 import java.util.HashMap;
@@ -25,11 +29,18 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class CartController {
 @Autowired
     private CartService cartService;
 @Autowired
     private UserService userService;
+
+@Autowired
+private OrderService orderService;
+
+
+private final MailSenderService mailSenderService;
 
 @GetMapping("/cart")
     public String getCart(@AuthenticationPrincipal User user, Model model) {
@@ -60,6 +71,17 @@ public class CartController {
         
         return "redirect:/cart";
     }
+
+    @GetMapping("/cart/order")
+    public String orderCart(@AuthenticationPrincipal User user) {
+        Order order = orderService.createOrder(user);
+        String body =  mailSenderService.createBody(user);
+        log.info("Body: {}", body);
+        mailSenderService.sendMail(user.getEmail(), "Ваш заказ № " + order.getId() + " выполнен", mailSenderService.createBody(user));
+        cartService.clearCart(user.getCart().getId());
+        return "redirect:/cart";
+    }
+
     private void updateUserCart(User user) {
         if (user.getCart() == null) {
             log.info("User's cart is null");
@@ -67,6 +89,4 @@ public class CartController {
             userService.saveUser(user);
         }
     }
-
-
 }

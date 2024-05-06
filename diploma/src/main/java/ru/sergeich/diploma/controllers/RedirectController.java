@@ -62,10 +62,10 @@ public class RedirectController {
         return "error";
     }
 
-    @GetMapping("/lk")
-    public String getLk(){
-        return "lk";
-    }
+//    @GetMapping("/lk")
+//    public String getLk(){
+//        return "lk";
+//    }
 
     @GetMapping("/redirect")
     public String redirect() {
