@@ -48,6 +48,12 @@ public class Cart {
     public int getBCount() {
         return (int) this.bouquets.size();
     }
+    public double getTotalPrice() {
+        if(this.bouquets.isEmpty()) return 0;
+        return this.bouquets.stream()
+                .mapToDouble(Bouquet::getPrice)
+                .sum();
+    }
 
 
     @Override
