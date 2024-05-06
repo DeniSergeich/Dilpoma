@@ -32,9 +32,9 @@ public class Cart {
         this.bouquets = new ArrayList<>();
     }
 
-    @OneToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+//    @OneToOne
+//    @JoinColumn(name = "order_id")
+//    private Order order;
 
     public Cart() {
 

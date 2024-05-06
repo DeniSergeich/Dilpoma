@@ -1,6 +1,7 @@
 package ru.sergeich.diploma.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -143,6 +144,12 @@ public class UserController {
         currentUser.setEmail(email.toLowerCase());
         userService.saveUser(currentUser);
         return "redirect:/logout";
+    }
+
+    @GetMapping("/lk")
+    public String lk(@AuthenticationPrincipal User user, Model model) {
+       model.addAttribute("orders", user.getOrders());
+       return "lk";
     }
 
 
