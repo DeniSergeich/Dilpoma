@@ -17,7 +17,11 @@ import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.services.CartService;
 import ru.sergeich.diploma.services.UserService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -33,6 +37,12 @@ public class CartController {
     updateUserCart(user);
     Cart cart = cartService.getCartById(user.getCart().getId());
     log.info("Cart: {} User: {}", cart.getId(), user.getId());
+
+    Map<Bouquet, Long> bouquetsMap = cart.getBouquets().stream()
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+
+    model.addAttribute("bouquets", bouquetsMap);
     model.addAttribute("cart", cart);
 
         return "cart";
@@ -47,6 +57,7 @@ public class CartController {
         Cart updatedCart = cartService.getCartById(user.getCart().getId());
         model.addAttribute("cart", updatedCart);
         log.info("Model cart: {}", model.getAttribute("cart"));
+        
         return "redirect:/cart";
     }
     private void updateUserCart(User user) {
