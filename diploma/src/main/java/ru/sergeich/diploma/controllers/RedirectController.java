@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
@@ -15,10 +17,15 @@ import ru.sergeich.diploma.services.BouquetService;
 import ru.sergeich.diploma.services.CartService;
 import ru.sergeich.diploma.services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class RedirectController {
+    @Autowired
+    private HttpServletRequest request;
     @Autowired
     private BouquetService bouquetService;
     @Autowired
@@ -26,16 +33,37 @@ public class RedirectController {
     @Autowired
     private CartService cartService;
 
-    @GetMapping("/contacts")
-    public String getContacts() {
-        return "contacts";
-    }
+//    @GetMapping("/contacts")
+//    public String getContacts() {
+//        return "contacts";
+//    }
+//
+//    @GetMapping("/masters")
+//    public String getMasters() {
+//        return "masters";
+//    }
+//
+//    @GetMapping("/error")
+//    public String getError(){
+//        return "error";
+//    }
+//    @GetMapping("/index")
+//    public String getHome(){
+//        return "index";
+//    }
 
-    @GetMapping("/masters")
-    public String getMasters() {
-        return "masters";
+    @GetMapping("/{viewName}")
+    public String getView(@PathVariable String viewName) {
+        Set<String> availableViews = new HashSet<>();
+        availableViews.add("index");
+        availableViews.add("masters");
+        availableViews.add("contacts");
+        availableViews.add("error");
+        if (!availableViews.contains(viewName)) {
+            return "index";
+        }
+        return viewName;
     }
-
     /**
      * Извлекает страницу входа, если пользователь не прошел аутентификацию, в противном случае перенаправляет на домашнюю страницу.
      *
@@ -44,33 +72,41 @@ public class RedirectController {
      */
     @GetMapping("/login")
     public String getLogin() throws Exception {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (!(auth instanceof AnonymousAuthenticationToken)) {
-            return "redirect:/";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                // Пользователь аутентифицирован, выполняем редирект на ту страницу, с которой пришел
+                String referer = request.getHeader("Referer");
+                return "redirect:" + referer;
+            }
         }
         return "login";
     }
 
-    @GetMapping("/index")
-    public String getHome(){
-        return "index";
-    }
 
-    @GetMapping("/error")
-    public String getError(){
-        return "error";
-    }
+
+
 
 //    @GetMapping("/lk")
 //    public String getLk(){
 //        return "lk";
 //    }
 
-    @GetMapping("/redirect")
-    public String redirect() {
-        return "redirect:/shop";
-    }
+//    @GetMapping("/redirect")
+//    public String redirect() {
+//        return "redirect:/shop";
+//    }
+//    @GetMapping("/referer")
+//    public String referer(@RequestParam(required = false) String referer, HttpServletRequest request) {
+//        if (referer != null) {
+//            // Redirect to the previous URL if available
+//            return "redirect:" + referer;
+//        } else {
+//            // Redirect to the default URL if no previous URL is available
+//            return "redirect:/shop";
+//        }
+//    }
 
 
 }

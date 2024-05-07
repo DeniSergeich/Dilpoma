@@ -14,7 +14,7 @@ import java.util.Set;
 public class Bouquet {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private long id;
     @NonNull
     private String name;
     private int amount;
@@ -47,9 +47,7 @@ public class Bouquet {
         if(obj == null || getClass() != obj.getClass())
             return false;
         Bouquet other = (Bouquet) obj;
-        if(id == null) {
-            return other.id == null;
-        } else return id.equals(other.id);
+        return id == other.id;
     }
 
 }
