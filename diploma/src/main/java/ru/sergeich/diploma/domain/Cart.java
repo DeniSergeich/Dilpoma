@@ -14,13 +14,13 @@ import java.util.Objects;
 public class Cart {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "cart_bouquet",
             joinColumns = @JoinColumn(name = "cart_id"),
@@ -43,7 +43,7 @@ public class Cart {
 
     public int countBouquetsById(Long bouquetId) {
         return (int) this.bouquets.stream()
-                .filter(b -> b.getId().equals(bouquetId))
+                .filter(b -> b.getId() == bouquetId)
                 .count();
     }
     public int getBCount() {

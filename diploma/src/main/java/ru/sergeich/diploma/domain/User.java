@@ -21,7 +21,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private Long id;
+    private long id;
 
     @Size(min=1, message = "Не может быть пустым!")
     private String username;
@@ -80,7 +80,7 @@ public class User implements UserDetails {
     }
 
     public int getBCount(Long bouquetId) {
-        return (int) cart.getBouquets().stream().filter(b -> b.getId().equals(bouquetId)).count();
+        return (int) cart.getBouquets().stream().filter(b -> b.getId() == bouquetId).count();
     }
     public int getAllTotalCost(){
         return (int) cart.getBouquets().stream().mapToDouble(Bouquet::getPrice).sum();

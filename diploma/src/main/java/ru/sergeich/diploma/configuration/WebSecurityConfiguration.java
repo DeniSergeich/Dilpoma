@@ -1,5 +1,6 @@
 package ru.sergeich.diploma.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,12 +11,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.sergeich.diploma.services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private HttpServletRequest request;
 
 
+    @Autowired
     private UserService userService;
 
     @Bean
@@ -35,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/shop", true)
                 .permitAll()
                 .and()
                 .logout()
@@ -49,6 +55,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers( "/**.png", "/**.gif", "/**.jpg", "favicon**");
     }
+
 
 
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{

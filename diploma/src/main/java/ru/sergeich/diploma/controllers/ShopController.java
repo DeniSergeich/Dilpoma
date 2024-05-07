@@ -36,14 +36,14 @@ public class ShopController {
 
     
     @GetMapping("/add_bouquet/{bouquetId}")
-    public String addB(@PathVariable Long bouquetId){
+    public String addB(@PathVariable long bouquetId){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         cartService.updateCart(user, bouquetId, true);
         return "redirect:/shop";
     }
 
     @GetMapping("/rem_bouquet/{bouquetId}")
-    public String removeB(@PathVariable Long bouquetId){
+    public String removeB(@PathVariable long bouquetId){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         cartService.updateCart(user, bouquetId, false);
         return "redirect:/shop";
