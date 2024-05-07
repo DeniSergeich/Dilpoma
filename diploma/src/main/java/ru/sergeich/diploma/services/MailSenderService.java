@@ -31,7 +31,7 @@ public class MailSenderService {
         message.setTo(to);
         message.setSubject("Ваш заказ" + subject + "выполнен");
         message.setText(text);
-        message.setFrom("damned_wolf@mail.ru");
+        message.setFrom("tsvetochki.mag@yandex.ru");
 
         mailSender.send(message);
     }
