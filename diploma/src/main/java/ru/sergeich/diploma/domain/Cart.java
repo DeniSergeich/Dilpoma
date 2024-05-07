@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity(name = "cart")
@@ -15,11 +16,11 @@ public class Cart {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "cart_bouquet",
             joinColumns = @JoinColumn(name = "cart_id"),
@@ -63,6 +64,10 @@ public class Cart {
                 ", user=" + user +
                 ", bouquets=" + bouquets +
                 '}';
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

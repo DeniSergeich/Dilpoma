@@ -37,8 +37,8 @@ public class User implements UserDetails {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
     public User() {
     }

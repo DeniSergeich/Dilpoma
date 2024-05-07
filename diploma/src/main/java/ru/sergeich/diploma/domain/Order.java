@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -21,8 +22,11 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "bouquet_id")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "order_bouquet",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "bouquet_id"))
     private List<Bouquet> bouquets;
 
     //private int count;
@@ -34,4 +38,14 @@ public class Order {
         this.bouquets = bouquet;
         this.date = LocalDate.now();
     }
+    public Double getTotalCost() {
+        return this.bouquets.stream()
+                .mapToDouble(Bouquet::getPrice)
+                .sum();
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }

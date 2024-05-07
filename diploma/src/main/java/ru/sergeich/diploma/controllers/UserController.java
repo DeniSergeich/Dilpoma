@@ -8,8 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.sergeich.diploma.domain.Order;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.services.UserService;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -148,7 +153,8 @@ public class UserController {
 
     @GetMapping("/lk")
     public String lk(@AuthenticationPrincipal User user, Model model) {
-       model.addAttribute("orders", user.getOrders());
+       Set<Order> orders = user.getOrders();
+       model.addAttribute("orders", orders);
        return "lk";
     }
 
