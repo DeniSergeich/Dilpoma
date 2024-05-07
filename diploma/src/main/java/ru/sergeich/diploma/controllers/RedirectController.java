@@ -33,37 +33,26 @@ public class RedirectController {
     @Autowired
     private CartService cartService;
 
-//    @GetMapping("/contacts")
-//    public String getContacts() {
-//        return "contacts";
-//    }
-//
-//    @GetMapping("/masters")
-//    public String getMasters() {
-//        return "masters";
-//    }
-//
-//    @GetMapping("/error")
-//    public String getError(){
-//        return "error";
-//    }
-//    @GetMapping("/index")
-//    public String getHome(){
-//        return "index";
-//    }
-
-    @GetMapping("/{viewName}")
-    public String getView(@PathVariable String viewName) {
-        Set<String> availableViews = new HashSet<>();
-        availableViews.add("index");
-        availableViews.add("masters");
-        availableViews.add("contacts");
-        availableViews.add("error");
-        if (!availableViews.contains(viewName)) {
-            return "index";
-        }
-        return viewName;
+    @GetMapping("/contacts")
+    public String getContacts() {
+        return "contacts";
     }
+
+    @GetMapping("/masters")
+    public String getMasters() {
+        return "masters";
+    }
+
+    @GetMapping("/error")
+    public String getError(){
+        return "error";
+    }
+    @GetMapping("/index")
+    public String getHome(){
+        return "index";
+    }
+
+
     /**
      * Извлекает страницу входа, если пользователь не прошел аутентификацию, в противном случае перенаправляет на домашнюю страницу.
      *
@@ -87,26 +76,26 @@ public class RedirectController {
 
 
 
-
+//
 //    @GetMapping("/lk")
 //    public String getLk(){
 //        return "lk";
 //    }
 
-//    @GetMapping("/redirect")
-//    public String redirect() {
-//        return "redirect:/shop";
-//    }
-//    @GetMapping("/referer")
-//    public String referer(@RequestParam(required = false) String referer, HttpServletRequest request) {
-//        if (referer != null) {
-//            // Redirect to the previous URL if available
-//            return "redirect:" + referer;
-//        } else {
-//            // Redirect to the default URL if no previous URL is available
-//            return "redirect:/shop";
-//        }
-//    }
+    @GetMapping("/redirect")
+    public String redirect() {
+        return "redirect:/shop";
+    }
+    @GetMapping("/referer")
+    public String referer(@RequestParam(required = false) String referer, HttpServletRequest request) {
+        if (referer != null) {
+            // Redirect to the previous URL if available
+            return "redirect:" + referer;
+        } else {
+            // Redirect to the default URL if no previous URL is available
+            return "redirect:/shop";
+        }
+    }
 
 
 }
