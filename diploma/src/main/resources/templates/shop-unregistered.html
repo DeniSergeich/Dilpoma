@@ -14,6 +14,7 @@
 <body background="pattern.jpg">
 
 <!--NAV-->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient sticky-top border-bottom border-dark font-monospace">
   <div class="container-fluid">
     <a class="navbar-brand" href="index">
@@ -60,6 +61,7 @@
 </nav>
 
 <!--MAIN-->
+
 <main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;" th:if="${#authentication.getPrincipal() != null}">
   <h1 class="text-center">Букеты от мастеров</h1>
   <div class="row justify-content-around">
@@ -69,14 +71,10 @@
         <div class="card-body">
           <h5 class="card-title" th:text="${bouquet.name}"></h5>
           <p class="card-text" th:text="${bouquet.description}"></p>
-
           <div class="btn-group" role="group" aria-label="Basic example">
-<!--            <a role="button" class="btn btn-secondary" th:href="@{/rem_bouquet/{id}(id=${bouquet.id})}" th:unless="${#authentication.getPrincipal() != null}">-</a>-->
-            <!--                        <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(bouquet.id)}"></button>-->
             <a role="button" class="btn btn-secondary" th:href="@{/add_bouquet/{id}(id=${bouquet.id})}">+</a>
             <button type="button" disabled class="btn btn-success" th:text="${bouquet.price}"></button>
           </div>
-
         </div>
       </div>
     </div>
@@ -84,6 +82,7 @@
 </main>
 
 <!--FOOTER-->
+
 <footer class="card-footer border-top border-dark bg-light bg-gradient">
   <div class="d-flex flex-row justify-content-between">
     <div class="m-auto">
