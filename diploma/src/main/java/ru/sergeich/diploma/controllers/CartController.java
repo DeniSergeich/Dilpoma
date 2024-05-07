@@ -77,7 +77,7 @@ private final MailSenderService mailSenderService;
         Order order = orderService.createOrder(user);
         String body =  mailSenderService.createBody(user);
         log.info("Body: {}", body);
-        mailSenderService.sendMail(user.getEmail(), "Ваш заказ № " + order.getId() + " выполнен", mailSenderService.createBody(user));
+        mailSenderService.sendMail(user.getEmail(), order.getId(), mailSenderService.createBody(user));
         cartService.clearCart(user.getCart().getId());
         return "redirect:/cart";
     }

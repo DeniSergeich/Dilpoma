@@ -26,10 +26,10 @@ public class MailSenderService {
 //    private String from;
 
     @Async
-    public void sendMail(String to, String subject, String text) {
+    public void sendMail(String to, long subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        message.setSubject("Ваш заказ" + subject + "выполнен");
+        message.setSubject("Ваш заказ № " + subject  + " выполнен");
         message.setText(text);
         message.setFrom("tsvetochki.mag@yandex.ru");
 
