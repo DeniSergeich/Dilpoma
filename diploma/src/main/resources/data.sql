@@ -17,5 +17,5 @@ INSERT INTO bouquets (id, name, amount, price, description, image) VALUES
 (7, 'Букет Восход', 10, 1900.0, 'description', 'bouquet_7.jpg'),
 (8, 'Букет Стихия', 10, 2600.0, 'description', 'bouquet_8.jpg'),
 (9, 'Букет Удача', 10, 2400.0, 'description', 'bouquet_9.jpg'),
-(10, 'Неизвестный букет', 10, 10.0, 'description', 'icon.jpg')
+(10, 'Неизвестный букет', 10, 10.0, 'description', 'icon.png')
 ON CONFLICT DO NOTHING;
