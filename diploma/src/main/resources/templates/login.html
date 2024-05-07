@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
 </head>
 <body background="pattern.jpg">
 
@@ -61,11 +62,11 @@
 
 <!--MAIN-->
 <main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;">
-    <div class="row min-vh-100">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <div class="row min-vh-100 align-items-center justify-content-center" style="max-width: 50%; margin: 0 auto">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3 align-items-center justify-content-center">
             <form th:action="@{/login}" method="post">
                 <fieldset>
-                    <h1>Войдите в свой аккаунт</h1>
+                    <h1 class="text-center">Войдите в свой аккаунт</h1>
                     <figure>
                         <figcaption class="blackquote-footer">
                             Вход в аккаунт позволит вам пользоваться магазином и не переживать за сохранность вашей корзины
@@ -92,17 +93,19 @@
                                placeholder="Пароль" required="true"/>
                     </div>
                     <br>
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-center">
                             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Войти"/>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                        </div>
+<!--                        <div class="col-xs-6 col-sm-6 col-md-6">-->
+<!--                        </div>-->
                     </div>
                 </fieldset>
             </form>
             <br>
+            <div class="text-center">
             <a href="/register" class="btn btn-outline-danger">Зарегистрироваться</a>
+            </div>
         </div>
     </div>
 </main>
