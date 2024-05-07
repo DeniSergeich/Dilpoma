@@ -1,0 +1,9 @@
+<style>
+    .order-details {
+        display: none;
+    }
+
+    .order.open .order-details {
+        display: block;
+    }
+</style>
