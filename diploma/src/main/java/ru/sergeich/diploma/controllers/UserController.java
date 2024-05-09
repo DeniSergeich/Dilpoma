@@ -12,8 +12,6 @@ import ru.sergeich.diploma.domain.Order;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.services.UserService;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Set;
 
 @Controller

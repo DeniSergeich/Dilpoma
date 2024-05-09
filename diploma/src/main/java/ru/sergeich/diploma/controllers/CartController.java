@@ -3,15 +3,10 @@ package ru.sergeich.diploma.controllers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.Order;
@@ -21,8 +16,7 @@ import ru.sergeich.diploma.services.MailSenderService;
 import ru.sergeich.diploma.services.OrderService;
 import ru.sergeich.diploma.services.UserService;
 
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;

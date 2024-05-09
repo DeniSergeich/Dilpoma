@@ -2,8 +2,6 @@ package ru.sergeich.diploma.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,12 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
-import ru.sergeich.diploma.domain.Order;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.services.BouquetService;
 import ru.sergeich.diploma.services.CartService;
 import ru.sergeich.diploma.services.UserService;
-import ru.sergeich.diploma.exceptions.BouquetNotFoundException;
 
 import java.util.List;
 @Slf4j
