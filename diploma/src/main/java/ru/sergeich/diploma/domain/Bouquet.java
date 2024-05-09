@@ -3,9 +3,8 @@ package ru.sergeich.diploma.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Data

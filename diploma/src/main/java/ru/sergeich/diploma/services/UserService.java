@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.repositories.UserRepository;
 

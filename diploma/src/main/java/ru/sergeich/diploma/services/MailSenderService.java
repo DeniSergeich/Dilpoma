@@ -1,17 +1,13 @@
 package ru.sergeich.diploma.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import ru.sergeich.diploma.domain.Bouquet;
-import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
 
-import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
