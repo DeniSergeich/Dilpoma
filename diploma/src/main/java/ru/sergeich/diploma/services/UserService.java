@@ -82,15 +82,9 @@ public class UserService implements UserDetailsService {
      * Регистрирует нового пользователя в системе.
      *
      * @param user — объект пользователя, содержащий регистрационные данные.
-     * @return void
      * @throws UsernameNotFoundException, если имя пользователя уже существует в базе данных
      */
     public void registerUser(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
-
-        if (userFromDB != null) {
-            throw new UsernameNotFoundException("User exists");
-        }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }

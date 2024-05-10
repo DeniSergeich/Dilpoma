@@ -50,7 +50,7 @@ public class RegisterController {
      */
     @PostMapping("/register")
     public String registerSave(@ModelAttribute("user") @Valid User user, Model model) {
-        if (user.getUsername().length() < 1) {
+        if (user.getUsername().isEmpty()) {
             model.addAttribute("errorLenUsername", true);
             return "register";
         }
