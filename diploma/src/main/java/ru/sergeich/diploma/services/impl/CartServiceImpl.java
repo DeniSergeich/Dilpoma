@@ -8,7 +8,10 @@ import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.exceptions.*;
 import ru.sergeich.diploma.repositories.CartRepository;
+import ru.sergeich.diploma.services.AuthService;
+import ru.sergeich.diploma.services.BouquetService;
 import ru.sergeich.diploma.services.CartService;
+import ru.sergeich.diploma.services.UserService;
 
 import java.util.List;
 @Slf4j
@@ -17,11 +20,11 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartRepository cartRepository;
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
     @Autowired
-    private BouquetServiceImpl bouquetServiceImpl;
+    private BouquetService bouquetService;
     @Autowired
-    private AuthServiceImpl authServiceImpl;
+    private AuthService authService;
 
 
     public Cart createCart(User user) {
@@ -60,7 +63,7 @@ public class CartServiceImpl implements CartService {
         if (cart == null) {
             cart = createCart(user);
             user.setCart(cart);
-            userServiceImpl.saveUser(user);
+            userService.saveUser(user);
         }
 
         if (isAdd) {
@@ -68,7 +71,7 @@ public class CartServiceImpl implements CartService {
         } else {
             removeBouquetFromCart(cart, bouquetId);
         }
-        authServiceImpl.updateAuthentication(user);
+        authService.updateAuthentication(user);
 
     }
 
@@ -79,7 +82,7 @@ public class CartServiceImpl implements CartService {
      */
     public void addBouquetToCart(Cart cart, Long bouquetId) {
         List <Bouquet> bouquets = cart.getBouquets();
-        bouquets.add(bouquetServiceImpl.getBouquetById(bouquetId)
+        bouquets.add(bouquetService.getBouquetById(bouquetId)
                 .orElseThrow(BouquetNotFoundException::new));
         cartRepository.save(cart);
         log.info("Добавлен букет в корзину");
@@ -92,7 +95,7 @@ public class CartServiceImpl implements CartService {
      */
     public void removeBouquetFromCart(Cart cart, Long bouquetId) {
         List <Bouquet> bouquets = cart.getBouquets();
-        Bouquet bouquet = bouquetServiceImpl.getBouquetById(bouquetId)
+        Bouquet bouquet = bouquetService.getBouquetById(bouquetId)
                 .orElseThrow(BouquetNotFoundException::new);
         boolean result = bouquets.remove(bouquet);
         if (result) log.info("Удален букет из корзины");
@@ -112,7 +115,7 @@ public class CartServiceImpl implements CartService {
         bouquets.clear();
         cart.setBouquets(bouquets);
         cartRepository.save(cart);
-        authServiceImpl.updateAuthentication(cart.getUser());
+        authService.updateAuthentication(cart.getUser());
         log.info("Корзина очищена");
     }
 
@@ -136,7 +139,5 @@ public class CartServiceImpl implements CartService {
     public Cart saveCart(Cart cart) {
         return cartRepository.save(cart);
     }
-
-
 
 }
