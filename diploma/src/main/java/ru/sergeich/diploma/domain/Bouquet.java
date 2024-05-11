@@ -32,6 +32,7 @@ public class Bouquet {
         this.description = description;
         this.image = image;
     }
+
     @Override
     public String toString() {
         return "Bouquet{" +

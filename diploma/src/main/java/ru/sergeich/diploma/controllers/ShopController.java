@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
-import ru.sergeich.diploma.services.BouquetService;
-import ru.sergeich.diploma.services.CartService;
-import ru.sergeich.diploma.services.UserService;
+import ru.sergeich.diploma.services.*;
 
 import java.util.List;
 @Slf4j
@@ -22,13 +20,10 @@ public class ShopController {
 
     @Autowired
     private BouquetService bouquetService;
-
     @Autowired
-    private  UserService userService;
+    private UserService userService;
     @Autowired
     private CartService cartService;
-
-
 
     
     @GetMapping("/add_bouquet/{bouquetId}")
@@ -67,5 +62,4 @@ public class ShopController {
             userService.saveUser(user);
         }
     }
-
 }

@@ -10,16 +10,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
 import ru.sergeich.diploma.repositories.UserRepository;
-import ru.sergeich.diploma.services.UserService;
+import ru.sergeich.diploma.services.impl.UserServiceImpl;
 
 
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceImplTest {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @MockBean
     private UserRepository userRepository;
@@ -39,14 +39,14 @@ public class UserServiceTest {
 
         when(userRepository.save(testUser)).thenReturn(testUser);
 
-        userService.saveUser(testUser);
+        userServiceImpl.saveUser(testUser);
 
         verify(userRepository, times(1)).save(testUser);
     }
     @Test
     void testLoadUserByUsername_UserNotFound() {
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
-            userService.loadUserByUsername("non-existent-user");
+            userServiceImpl.loadUserByUsername("non-existent-user");
         });
     }
     @Test
@@ -55,7 +55,7 @@ public class UserServiceTest {
 
         when(userRepository.findByUsername(testUser.getUsername())).thenReturn(null);
         when(userRepository.save(testUser)).thenReturn(testUser);
-        userService.saveUser(testUser);
+        userServiceImpl.saveUser(testUser);
         verify(userRepository, times(1)).save(testUser);
     }
 }
