@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @Data
 @Entity(name = "bouquet")
 @Table(name = "bouquets")
