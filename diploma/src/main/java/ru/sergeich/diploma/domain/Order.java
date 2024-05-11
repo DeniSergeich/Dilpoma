@@ -29,8 +29,6 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "bouquet_id"))
     private List<Bouquet> bouquets;
 
-    //private int count;
-
     private LocalDate date;
 
     public Order(User user, List<Bouquet> bouquet) {

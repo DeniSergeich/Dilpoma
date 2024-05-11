@@ -32,10 +32,6 @@ public class Cart {
         this.bouquets = new ArrayList<>();
     }
 
-//    @OneToOne
-//    @JoinColumn(name = "order_id")
-//    private Order order;
-
     public Cart() {
 
     }
@@ -54,7 +50,6 @@ public class Cart {
                 .mapToDouble(Bouquet::getPrice)
                 .sum();
     }
-
 
     @Override
     public String toString() {

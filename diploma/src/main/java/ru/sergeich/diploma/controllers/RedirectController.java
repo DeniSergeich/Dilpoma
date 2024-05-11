@@ -7,9 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.sergeich.diploma.services.BouquetService;
-import ru.sergeich.diploma.services.CartService;
-import ru.sergeich.diploma.services.UserService;
+import ru.sergeich.diploma.services.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -63,15 +61,6 @@ public class RedirectController {
         }
         return "login";
     }
-
-
-
-
-//
-//    @GetMapping("/lk")
-//    public String getLk(){
-//        return "lk";
-//    }
 
     @GetMapping("/redirect")
     public String redirect() {

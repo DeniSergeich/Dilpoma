@@ -11,10 +11,7 @@ import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.Order;
 import ru.sergeich.diploma.domain.User;
-import ru.sergeich.diploma.services.CartService;
-import ru.sergeich.diploma.services.MailSenderService;
-import ru.sergeich.diploma.services.OrderService;
-import ru.sergeich.diploma.services.UserService;
+import ru.sergeich.diploma.services.*;
 
 
 import java.util.Map;
