@@ -1,6 +1,6 @@
 package ru.sergeich.diploma.services.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.repositories.BouquetRepository;
@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class BouquetServiceImpl implements BouquetService {
 
-    @Autowired
-    private BouquetRepository bouquetRepository;
+
+    private final BouquetRepository bouquetRepository;
 
     /**
      * Получение букета по айди

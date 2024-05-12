@@ -1,6 +1,6 @@
 package ru.sergeich.diploma.services.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,10 @@ import ru.sergeich.diploma.services.UserService;
  * Сервис для обновления авторизованного пользователя в контексте безопасности
  */
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    @Autowired
-    UserService userService;
+
+    private final UserService userService;
 
     /**
      * Обновляет пользователя в контексте безопасности

@@ -1,7 +1,7 @@
 package ru.sergeich.diploma.services.impl;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
@@ -16,15 +16,16 @@ import ru.sergeich.diploma.services.UserService;
 import java.util.List;
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
-    @Autowired
-    private CartRepository cartRepository;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private BouquetService bouquetService;
-    @Autowired
-    private AuthService authService;
+
+    private final CartRepository cartRepository;
+
+    private final UserService userService;
+
+    private final BouquetService bouquetService;
+
+    private final AuthService authService;
 
 
     public Cart createCart(User user) {

@@ -2,7 +2,6 @@ package ru.sergeich.diploma.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,18 +21,16 @@ import java.util.stream.Collectors;
 @Controller
 @RequiredArgsConstructor
 public class CartController {
-@Autowired
-    private CartService cartService;
-@Autowired
-    private UserService userService;
 
-@Autowired
-private OrderService orderService;
+    private final CartService cartService;
 
+    private final UserService userService;
 
-private final MailSenderService mailSenderService;
+    private final OrderService orderService;
 
-@GetMapping("/cart")
+    private final MailSenderService mailSenderService;
+
+    @GetMapping("/cart")
     public String getCart(@AuthenticationPrincipal User user, Model model) {
 
     updateUserCart(user);
