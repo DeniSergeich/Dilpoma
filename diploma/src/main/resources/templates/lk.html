@@ -142,8 +142,13 @@
                 <div th:each="order, iterStat : ${orders}" class="accordion-item">
                     <h2 class="accordion-header" th:id="'heading' + ${iterStat.index}">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" th:attr="data-bs-target='#collapse' + ${iterStat.index}" aria-expanded="true" aria-controls="'collapse' + ${iterStat.index}">
-                            Номер заказа:<span th:text="${order.id}"></span> | Дата: <span th:text="${order.date}"></span> | Сумма: <span th:text="${order.getTotalCost()}"></span>
+                            <th:block>
+                                <div style="margin-right: 5px;">Номер заказа:</div> <span th:text="${order.id}"></span>
+                                <div style="margin-left: 5px;">| Дата:</div> <span th:text="${order.date}"></span>
+                                <div style="margin-left: 5px;">| Сумма:</div> <span th:text="${order.getTotalCost()}"></span>
+                            </th:block>
                         </button>
+
                     </h2>
                     <div th:id="'collapse' + ${iterStat.index}" class="accordion-collapse collapse" aria-labelledby="'heading' + ${iterStat.index}" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
