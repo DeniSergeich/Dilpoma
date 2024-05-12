@@ -72,9 +72,9 @@
 <!--MAIN-->
 
 <main class="container-flex fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;">
-    <div class="row min-vh-100 align-items-center justify-content-center">
+    <div class="row min-vh-100 align-items-start justify-content-center">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <h1 class="text-center">Личный кабинет</h1>
+            <h1 class="text-center" style="margin-top: 0">Личный кабинет</h1>
             <div>Никнейм: <b th:text="${#authentication.getPrincipal().getUsername()}"></b></div>
             <div>Пароль: <b>Скрыто</b></div>
             <div>Почта: <b th:text="${#authentication.getPrincipal().getEmail()}"></b></div>
@@ -132,10 +132,20 @@
                 <button type="button" class="btn btn-secondary"><a style="text-decoration: none; color: white;" href="lk-password">Изменить Пароль</a></button>
                 <button type="button" class="btn btn-secondary"><a style="text-decoration: none; color: white;" href="lk-email">Изменить Почту</a></button>
             </div>
-            <div style="display: flex; justify-content: center;" >
-                <h1 class="text-center" style="margin-top: 20px;">История покупок</h1>
-            </div>
-            <div class="accordion" id="accordionExample">
+
+            <div th:if="${orders != null}">
+
+                <div class="accordion" id="accordion1">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <div style="display: flex; justify-content: center;" >
+                                <h4 class="text-center" style="margin-right: 5px;">История покупок</h4>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion1">
+            <div class="accordion" id="accordion">
                 <div th:each="order, iterStat : ${orders}" class="accordion-item">
                     <h2 class="accordion-header" th:id="'heading' + ${iterStat.index}">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" th:attr="data-bs-target='#collapse' + ${iterStat.index}" aria-expanded="true" aria-controls="'collapse' + ${iterStat.index}">
@@ -152,12 +162,16 @@
                             <div th:each="bouquet, iterStat2 : ${order.bouquets}">
                                 <span th:text="${bouquet.name}"></span> | Цена: <span th:text="${bouquet.price}"></span>
                                 <span th:if="${iterStat2.last}"style="display: block; text-align: center; margin-top: 10px;">  Сумма: <span th:text="${order.getTotalCost()}"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </main>
 
