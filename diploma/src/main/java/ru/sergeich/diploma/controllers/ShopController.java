@@ -1,7 +1,7 @@
 package ru.sergeich.diploma.controllers;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.User;
-import ru.sergeich.diploma.services.*;
+import ru.sergeich.diploma.services.BouquetService;
+import ru.sergeich.diploma.services.CartService;
+import ru.sergeich.diploma.services.UserService;
+
 
 import java.util.List;
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class ShopController {
 
-    @Autowired
-    private BouquetService bouquetService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private CartService cartService;
+    private final BouquetService bouquetService;
+    private final UserService userService;
+    private final CartService cartService;
 
-    
     @GetMapping("/add_bouquet/{bouquetId}")
     public String addB(@PathVariable long bouquetId){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -1,6 +1,6 @@
 package ru.sergeich.diploma.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,10 +16,11 @@ import javax.validation.Valid;
 import java.util.Objects;
 
 @Controller
+@RequiredArgsConstructor
 public class RegisterController {
 
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     /**
      * Получает регистрационную форму для нового пользователя. Если пользователь уже прошел аутентификацию, происходит перенаправление на домашнюю страницу.
