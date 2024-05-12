@@ -6,6 +6,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.sergeich.diploma.domain.Bouquet;
 import ru.sergeich.diploma.domain.Cart;
 import ru.sergeich.diploma.domain.Order;
@@ -57,16 +58,18 @@ public class CartController {
         model.addAttribute("cart", updatedCart);
         log.info("Model cart: {}", model.getAttribute("cart"));
         
-        return "redirect:/cart";
+        return "cart";
     }
 
     @GetMapping("/cart/order")
-    public String orderCart(@AuthenticationPrincipal User user) {
+    public String orderCart(@AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         Order order = orderService.createOrder(user);
-        String body =  mailSenderService.createBody(user);
+        String body = mailSenderService.createBody(user);
         log.info("Body: {}", body);
-        mailSenderService.sendMail(user.getEmail(), order.getId(), mailSenderService.createBody(user));
+        mailSenderService.sendMail(user.getEmail(), order.getId(), body);
         cartService.clearCart(user.getCart().getId());
+        redirectAttributes.addFlashAttribute("infoSetting", true);
+        redirectAttributes.addFlashAttribute("infoMessage", "Информация о заказе отправлена на " + user.getEmail());
         return "redirect:/cart";
     }
 
