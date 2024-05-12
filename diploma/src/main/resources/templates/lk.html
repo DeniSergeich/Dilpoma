@@ -132,10 +132,7 @@
                 <button type="button" class="btn btn-secondary"><a style="text-decoration: none; color: white;" href="lk-password">Изменить Пароль</a></button>
                 <button type="button" class="btn btn-secondary"><a style="text-decoration: none; color: white;" href="lk-email">Изменить Почту</a></button>
             </div>
-            <div style="display: flex; justify-content: center;"  th:if="${orders} == null">
-                <h1 class="text-center" style="margin-top: 20px;">История покупок пуста</h1>
-            </div>
-            <div style="display: flex; justify-content: center;"  th:if="${orders} != null">
+            <div style="display: flex; justify-content: center;" >
                 <h1 class="text-center" style="margin-top: 20px;">История покупок</h1>
             </div>
             <div class="accordion" id="accordionExample">
