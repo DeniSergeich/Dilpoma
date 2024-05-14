@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,8 +51,8 @@ public class RegisterController {
      * @return имя представления, куда пользователь должен быть перенаправлен в зависимости от результата регистрации.
      */
     @PostMapping("/register")
-    public String registerSave(@ModelAttribute("user") @Valid User user, Model model) {
-        if (user.getUsername().isEmpty()) {
+    public String registerSave(@ModelAttribute("user") User user, Model model) {
+        if (user.getUsername().length() < 3) {
             model.addAttribute("errorLenUsername", true);
             return "register";
         }
