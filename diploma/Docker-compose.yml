@@ -1,0 +1,22 @@
+services:
+  client-backend:
+    image: client:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - service-db
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db:5432/postgres
+
+  service-db:
+    image: postgres:13
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    restart: unless-stopped

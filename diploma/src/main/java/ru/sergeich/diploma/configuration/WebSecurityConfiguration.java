@@ -17,12 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private HttpServletRequest request;
 
 
-    @Autowired
-    private UserService userService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -58,7 +54,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
 
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
-    }
+
 }
