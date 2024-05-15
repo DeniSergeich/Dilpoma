@@ -10,15 +10,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <style>
+        body {
+            background-image: url('pattern.jpg');
+            background-size: auto;
+            background-repeat: repeat;
+            background-position: center;
+        }
+    </style>
 </head>
-<body background="pattern.jpg">
+
+<body>
 
 <!--NAV-->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient sticky-top border-bottom border-dark font-monospace">
     <div class="container-fluid">
         <a class="navbar-brand" href="index">
             <img src="icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
-            Цветочек</a>
+            Рай цветов</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -60,12 +70,13 @@
 </nav>
 
 <!--MAIN-->
+
 <main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;">
-    <div class="row min-vh-100">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <div class="row min-vh-100 align-items-center justify-content-center" style="max-width: 50%; margin: 0 auto">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3 align-items-center justify-content-center">
             <form th:action="@{/login}" method="post">
                 <fieldset>
-                    <h1>Войдите в свой аккаунт</h1>
+                    <h1 class="text-center">Войдите в свой аккаунт</h1>
                     <figure>
                         <figcaption class="blackquote-footer">
                             Вход в аккаунт позволит вам пользоваться магазином и не переживать за сохранность вашей корзины
@@ -84,7 +95,7 @@
 
                     <div class="form-group">
                         <input type="text" name="username" id="username" class="form-control input-lg"
-                               placeholder="Никнейм" required="true" autofocus="true"/>
+                               placeholder="Логин" required="true" autofocus="true"/>
                     </div>
                     <br>
                     <div class="form-group">
@@ -92,17 +103,17 @@
                                placeholder="Пароль" required="true"/>
                     </div>
                     <br>
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-center">
                             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Войти"/>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
                         </div>
                     </div>
                 </fieldset>
             </form>
             <br>
+            <div class="text-center">
             <a href="/register" class="btn btn-outline-danger">Зарегистрироваться</a>
+            </div>
         </div>
     </div>
 </main>
@@ -112,19 +123,19 @@
 <footer class="card-footer border-top border-dark bg-light bg-gradient">
     <div class="d-flex flex-row justify-content-between">
         <div class="m-auto">
-            <a class="text-black" style="text-decoration: none" href="https://github.com/1499maxawergy">
+            <a class="text-black" style="text-decoration: none" href="https://github.com/DeniSergeich/Dilpoma">
                 <img src="github.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
                 ГитХаб
             </a>
         </div>
         <div class="m-auto">
-            <a class="text-black" style="text-decoration: none" href="https://t.me/maxawergy">
+            <a class="text-black" style="text-decoration: none" href="https://t.me">
                 <img src="tg-icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
                 Телеграм
             </a>
         </div>
         <div class="m-auto">
-            <a class="text-black" style="text-decoration: none" href="https://vk.com/maxawergy">
+            <a class="text-black" style="text-decoration: none" href="https://vk.com/flowers_che">
                 <img src="vk-icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
                 Вконтакте
             </a>

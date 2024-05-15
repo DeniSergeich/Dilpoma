@@ -1,124 +1,67 @@
 package ru.sergeich.diploma.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-@Setter
-@Getter
-@Entity(name = "cart")
+@Data
+@Entity
 @Table(name = "carts")
 public class Cart {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
-    private int id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User userID;
+    private User user;
 
-    private int bouquetNumber;
-    private int bouquetCount;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "cart_bouquet",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "bouquet_id")
+    )
+    private List<Bouquet> bouquets;
 
-    public Cart(User userID, int bouquetNumber) {
-        this.userID = userID;
-        this.bouquetNumber = bouquetNumber;
+    public Cart(User user) {
+        this.user = user;
+        this.bouquets = new ArrayList<>();
     }
 
     public Cart() {
 
     }
 
-    public String getPhotoAddress(){
-        return "bouquet_" + String.valueOf(bouquetNumber) + ".jpg";
+    public int countBouquetsById(Long bouquetId) {
+        return (int) this.bouquets.stream()
+                .filter(b -> b.getId() == bouquetId)
+                .count();
     }
-
-    public String getPrice(boolean totalCost){
-        switch (this.bouquetNumber){
-            case 1:
-                if (totalCost)
-                    return String.valueOf(1500 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(1500) + " руб.";
-            case 2:
-                if (totalCost)
-                    return String.valueOf(1800 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(1800) + " руб.";
-            case 3:
-                if (totalCost)
-                    return String.valueOf(2300 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(2300) + " руб.";
-            case 4:
-                if (totalCost)
-                    return String.valueOf(5000 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(5000) + " руб.";
-            case 5:
-                if (totalCost)
-                    return String.valueOf(3100 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(3100) + " руб.";
-            case 6:
-                if (totalCost)
-                    return String.valueOf(2800 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(2800) + " руб.";
-            case 7:
-                if (totalCost)
-                    return String.valueOf(1900 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(1900) + " руб.";
-            case 8:
-                if (totalCost)
-                    return String.valueOf(2600 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(2600) + " руб.";
-            case 9:
-                if (totalCost)
-                    return String.valueOf(2400 * bouquetCount) + " руб.";
-                else
-                    return String.valueOf(2400) + " руб.";
-            default:
-                return "Неизвестно";
-        }
+    public int getBCount() {
+        return (int) this.bouquets.size();
     }
-
-    public String getName(){
-        switch (this.bouquetNumber){
-            case 1:
-                return "Букет Микс";
-            case 2:
-                return "Букет Комплимент";
-            case 3:
-                return "Букет Свадебный";
-            case 4:
-                return "Букет Джентельмен";
-            case 5:
-                return "Букет Вьюга";
-            case 6:
-                return "Букет Джунгли";
-            case 7:
-                return "Букет Восход";
-            case 8:
-                return "Букет Стихия";
-            case 9:
-                return "Букет Удача";
-            default:
-                return "Неизвестный букет";
-        }
+    public double getTotalPrice() {
+        if(this.bouquets.isEmpty()) return 0;
+        return this.bouquets.stream()
+                .mapToDouble(Bouquet::getPrice)
+                .sum();
     }
 
     @Override
     public String toString() {
         return "Cart{" +
                 "id=" + id +
-                ", userID=" + userID +
-                ", bouquetNumber=" + bouquetNumber +
-                ", bouquetCount=" + bouquetCount +
+                ", user=" + user +
+                ", bouquets=" + bouquets +
                 '}';
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }

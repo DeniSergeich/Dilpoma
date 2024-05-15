@@ -10,15 +10,34 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .column {
+      width: 50%;
+    }
+    body {
+      background-image: url('pattern.jpg');
+      background-size: auto;
+      background-repeat: repeat;
+      background-position: center;
+    }
+  </style>
 </head>
-<body background="pattern.jpg">
+
+<body>
 
 <!--NAV-->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient sticky-top border-bottom border-dark font-monospace">
   <div class="container-fluid">
     <a class="navbar-brand" href="index">
       <img src="icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
-      Цветочек</a>
+      Рай цветов</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -60,26 +79,28 @@
 </nav>
 
 <!--MAIN-->
+
 <main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;">
-  <div class="row min-vh-100">
+
+  <div class="container">
+    <div class="column">
     <div class="col-md-6 m-auto">
-      <iframe class="container-fluid"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.3729499497217!2d37.61530535122988!3d55.75202328045771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a50b315e573%3A0xa886bf5a3d9b2e68!2z0JzQvtGB0LrQvtCy0YHQutC40Lkg0JrRgNC10LzQu9GM!5e0!3m2!1sru!2sru!4v1649174809948!5m2!1sru!2sru"
-              width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <script type="text/javascript"
+              charset="utf-8"
+              async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aef1016ef3ad6153c6aa61c46c172e8bb1b163b945b86990b9acd9ae3fd5c8168&amp;width=600&amp;height=450&amp;lang=ru_RU&amp;scroll=true">
+      </script>
     </div>
+    </div>
+    <div class="column">
     <div style="font-family: 'Comic Sans MS', serif;" class="col-md-6 text-justify m-auto lh-lg p-5">
       <address>
-        <b>ООО "Цветочек"</b>
-        <br>Москва, 103132
-        <br>ул.Боровицкая, Кремль
-        <br><b>Метро:</b>
-        <br>Охотный ряд, Александровский сад
-        <br><b>Координаты:</b>
-        <br>55.751999,37.617734
+        <b>ООО "Рай цветов"</b>
+        <br>Череповец, 162106
+        <br>ул.Рыбинская, д.14
         <br><b>Телефон:</b>
         <br><a href="tel:+78008888888">+7(800)-888-88-88</a>
       </address>
+    </div>
     </div>
   </div>
 </main>
@@ -89,19 +110,19 @@
 <footer class="card-footer border-top border-dark bg-light bg-gradient">
   <div class="d-flex flex-row justify-content-between">
     <div class="m-auto">
-      <a class="text-black" style="text-decoration: none" href="https://github.com/1499maxawergy">
+      <a class="text-black" style="text-decoration: none" href="https://github.com/DeniSergeich/Dilpoma">
         <img src="github.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
         ГитХаб
       </a>
     </div>
     <div class="m-auto">
-      <a class="text-black" style="text-decoration: none" href="https://t.me/maxawergy">
+      <a class="text-black" style="text-decoration: none" href="https://t.me">
         <img src="tg-icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
         Телеграм
       </a>
     </div>
     <div class="m-auto">
-      <a class="text-black" style="text-decoration: none" href="https://vk.com/maxawergy">
+      <a class="text-black" style="text-decoration: none" href="https://vk.com">
         <img src="vk-icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
         Вконтакте
       </a>

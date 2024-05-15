@@ -11,12 +11,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.sergeich.diploma.services.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private HttpServletRequest request;
 
 
+    @Autowired
     private UserService userService;
 
     @Bean
@@ -30,13 +35,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/register", "/", "/index", "/masters", "/contacts", "/shop")
+                .antMatchers("/register", "/", "/index", "/masters", "/contacts", "/shop", "shop-unregistered")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/shop", true)
                 .permitAll()
                 .and()
                 .logout()
@@ -50,6 +55,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers( "/**.png", "/**.gif", "/**.jpg", "favicon**");
     }
+
 
 
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{

@@ -8,30 +8,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.validation.constraints.Size;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "user")
+@Entity
 @Table(name = "users")
 @Data
 @AllArgsConstructor
 public class User implements UserDetails {
-
-
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private int id;
-
-    @Size(min=2, message = "Не меньше 5 знаков")
+    private long id;
     private String username;
-    @Size(min=2, message = "Не меньше 5 знаков")
     private String password;
     @Transient
     private String passwordConfirm;
     private String email;
-
-    @OneToMany(mappedBy = "userID", fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<Cart> list = new HashSet<Cart>();
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
     public User() {
     }
@@ -41,6 +37,7 @@ public class User implements UserDetails {
         this.password = password;
         this.passwordConfirm = passwordConfirm;
         this.email = email;
+        this.cart = new Cart(this);
     }
 
 
@@ -71,32 +68,15 @@ public class User implements UserDetails {
         return null;
     }
 
-
-
-    public int getBCount(int bouquetNumber){
-        for (Cart item : list){
-            if (item.getBouquetNumber() == bouquetNumber){
-                return item.getBouquetCount();
-            }
-        }
-        return 0;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\''+
+                '}';
     }
 
-    public Cart getB(int bouquerNumber){
-        for (Cart item: list){
-            if (item.getBouquetNumber() == bouquerNumber)
-                return item;
-        }
-        return null;
-    }
 
-    public String getAllTotalCost(){
-        int total = 0;
-        for (Cart item: this.list){
-            String temp = item.getPrice(true).replaceAll("\\D+","");
-            total += Integer.parseInt(temp);
-        }
-        return String.valueOf(total) + " руб.";
-    }
+
 
 }

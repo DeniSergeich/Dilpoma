@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <title>Цветочный магазин | Магазин</title>
     <meta charset="utf-8">
@@ -10,15 +11,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <style>
+        body {
+            background-image: url('pattern.jpg');
+            background-size: auto;
+            background-repeat: repeat;
+            background-position: center;
+        }
+    </style>
+
 </head>
-<body background="pattern.jpg">
+
+<body>
 
 <!--NAV-->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient sticky-top border-bottom border-dark font-monospace">
     <div class="container-fluid">
         <a class="navbar-brand" href="index">
             <img src="icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
-            Цветочек</a>
+            Рай цветов</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -60,176 +72,21 @@
 </nav>
 
 <!--MAIN-->
+
 <main class="container-fluid fade show bg-light bg-gradient" style="--bs-bg-opacity: .75;">
     <h1 class="text-center">Букеты от мастеров</h1>
-    <div class="container mt-4 min-vh-100">
-        <div class="d-flex flex-row flex-wrap justify-content-md-between justify-content-center">
-
-            <div class="mb-3" id="b1">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_1.jpg" class="card-img-top" alt="bouquet_1">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Микс</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Анастасия</h6>
-                        <p class="card-text">Цветы всех времен и народов замиксованы для того, чтобы порадовать вашу вторую половинку.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b1">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(1)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b1">+</a>
-                            <button type="button" disabled class="btn btn-success">1500 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b2">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_2.jpg" class="card-img-top" alt="bouquet_2">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Комплимент</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Елена</h6>
-                        <p class="card-text">Коллега на работе помогла просто так? Это повод подарить ей букетик, как жест доброй воли.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b2">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(2)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b2">+</a>
-                            <button type="button" disabled class="btn btn-success">1800 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b3">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_3.jpg" class="card-img-top" alt="bouquet_3">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Свадебный</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Анастасия</h6>
-                        <p class="card-text">Все так быстро завертелось, закрутилось. Завтра свадьба, а лаконичного букета нет? Это предложение для вас.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b3">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(3)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b3">+</a>
-                            <button type="button" disabled class="btn btn-success">2300 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b4">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_4.jpg" class="card-img-top" alt="bouquet_1">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Джентельмен</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Анастасия</h6>
-                        <p class="card-text">Вы человек с деньгами, уважением, честью. Докажите, что вы джентельмен, подарив этот безукоризнненный букет.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b4">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(4)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b4">+</a>
-                            <button type="button" disabled class="btn btn-success">5000 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b5">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_5.jpg" class="card-img-top" alt="bouquet_2">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Вьюга</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Ксения</h6>
-                        <p class="card-text">Сердце вашей второй половинки холодно как никогда? У нас есть решение! Данный букет растопит ее сердечко.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b5">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(5)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b5">+</a>
-                            <button type="button" disabled class="btn btn-success">3100 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b6">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_6.jpg" class="card-img-top" alt="bouquet_3">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Джунгли</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Елена</h6>
-                        <p class="card-text">Жарко, страстно и опасно. Эти слова про вашу женщину? Букет данной серии будет горячо ею принят.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b6">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(6)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b6">+</a>
-                            <button type="button" disabled class="btn btn-success">2800 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" id="b7">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_7.jpg" class="card-img-top" alt="bouquet_1">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Восход</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Ксения</h6>
-                        <p class="card-text">Хотите, чтобы ваша женщина светилась также, как солнце на восходе? Мы знаем, что вам нужно.</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b7">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(7)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b7">+</a>
-                            <button type="button" disabled class="btn btn-success">1900 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3" id="b8">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_8.jpg" class="card-img-top" alt="bouquet_2">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Стихия</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Анастасия</h6>
-                        <p class="card-text">Из крайности в крайность, разрушительна и радикальна? Данный букет уcмирит ее стихию, даже не сомневайтесь!</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b8">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(8)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b8">+</a>
-                            <button type="button" disabled class="btn btn-success">2600 руб.</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3" id="b9">
-                <div class="card" style="width: 18rem;">
-                    <img src="bouquet_9.jpg" class="card-img-top" alt="bouquet_3">
-                    <div class="card-body">
-                        <h5 class="card-title">Букет Удача</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Мастер Елена</h6>
-                        <p class="card-text">Не знаете, что выбрать? Бегаете от одного букета к другому? Предоставьте выбор нам, вы не пожалеете!</p>
-
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" class="btn btn-secondary" href="rem_b9">-</a>
-                            <button type="button" disabled class="btn btn-secondary" th:text="${#authentication.getPrincipal().getBCount(9)}"></button>
-                            <a role="button" class="btn btn-secondary" href="add_b9">+</a>
-                            <button type="button" disabled class="btn btn-success">2400 руб.</button>
-                        </div>
-
+    <div class="row justify-content-around">
+        <div class="col-md-4 mb-3 text-center card-deck d-flex justify-content-center" th:each="bouquet : ${bouquets}">
+            <div class="card">
+                <img th:src="${bouquet.image}" class="card-img-top" alt="bouquet_2">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${bouquet.name}"></h5>
+                    <p class="card-text" th:text="${bouquet.description}"></p>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a role="button" class="btn btn-secondary" th:href="@{/rem_bouquet/{id}(id=${bouquet.id})}">-</a>
+                        <button type="button" disabled class="btn btn-secondary" th:text="${cart.countBouquetsById(bouquet.id)}"></button>
+                        <a role="button" class="btn btn-secondary" th:href="@{/add_bouquet/{id}(id=${bouquet.id})}">+</a>
+                        <button type="button" disabled class="btn btn-success" th:text="${bouquet.price}"></button>
                     </div>
                 </div>
             </div>
@@ -238,22 +95,23 @@
 </main>
 
 <!--FOOTER-->
+
 <footer class="card-footer border-top border-dark bg-light bg-gradient">
     <div class="d-flex flex-row justify-content-between">
         <div class="m-auto">
-            <a class="text-black" style="text-decoration: none" href="https://github.com/1499maxawergy">
+            <a class="text-black" style="text-decoration: none" href="https://github.com/DeniSergeich/Dilpoma">
                 <img src="github.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
                 ГитХаб
             </a>
         </div>
         <div class="m-auto">
-            <a class="text-black" style="text-decoration: none" href="https://t.me/maxawergy">
+            <a class="text-black" style="text-decoration: none" href="https://t.me">
                 <img src="tg-icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
                 Телеграм
             </a>
         </div>
         <div class="m-auto">
-            <a class="text-black" style="text-decoration: none" href="https://vk.com/maxawergy">
+            <a class="text-black" style="text-decoration: none" href="https://vk.com/flowers_che">
                 <img src="vk-icon.png" width="30" height="30" class="d-inline-block align-top" alt="Icon">
                 Вконтакте
             </a>
