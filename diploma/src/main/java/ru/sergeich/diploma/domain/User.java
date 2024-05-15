@@ -75,16 +75,8 @@ public class User implements UserDetails {
                 ", username='" + username + '\''+
                 '}';
     }
-    public int getAllTotalCost(){
-        return (int) cart.getBouquets().stream().mapToDouble(Bouquet::getPrice).sum();
-    }
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\''+
-                '}';
-    }
+
+
 
 
 }
