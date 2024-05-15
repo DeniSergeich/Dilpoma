@@ -100,9 +100,8 @@ public class UserController {
      * @return имя представления "lk"
      */
     @PostMapping("/lk-password")
-    public String confirmPassword(@ModelAttribute("newPassword") String newPassword,
+    public String confirmPassword(@AuthenticationPrincipal User user, @ModelAttribute("newPassword") String newPassword,
                                   @ModelAttribute("newPasswordConfirm") String newPasswordConfirm, Model model) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (newPassword.length() < 5){
             model.addAttribute("errorSetting", true);
             model.addAttribute("message", "Пароль должен содержать не менее 5 символов.");
@@ -112,9 +111,9 @@ public class UserController {
             model.addAttribute("message", "Пароли не совпадают.");
             return "lk";
         }
-        currentUser.setPassword(newPassword);
-        currentUser.setPasswordConfirm(newPasswordConfirm);
-        userService.rootResaveUserWithPassword(currentUser);
+        user.setPassword(newPassword);
+        user.setPasswordConfirm(newPasswordConfirm);
+        userService.rootResaveUserWithPassword(user);
         return "redirect:/logout";
     }
 
@@ -127,10 +126,9 @@ public class UserController {
      * @return имя представления "lk"
      */
     @GetMapping("/lk-email")
-    public String changeEmail(Model model) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String changeEmail(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("changeEmail", true);
-        model.addAttribute("email", currentUser.getEmail());
+        model.addAttribute("email", user.getEmail());
         model = addInfoAboutSession(model);
         return "lk";
     }
@@ -143,10 +141,9 @@ public class UserController {
      * @return имя представления "lk"
      */
     @PostMapping("/lk-email")
-    public String confirmEmail(@ModelAttribute("email") String email, Model model) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        currentUser.setEmail(email.toLowerCase());
-        userService.saveUser(currentUser);
+    public String confirmEmail(@ModelAttribute("email") String email,@AuthenticationPrincipal User user,  Model model) {
+        user.setEmail(email.toLowerCase());
+        userService.saveUser(user);
         return "redirect:/logout";
     }
 
