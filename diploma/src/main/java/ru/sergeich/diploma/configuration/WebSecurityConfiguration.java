@@ -13,8 +13,6 @@ import ru.sergeich.diploma.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
-
 
 @Configuration
 @EnableWebSecurity
