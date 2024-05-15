@@ -14,5 +14,4 @@ public interface UserService extends UserDetailsService {
     void rootResaveUserWithPassword(User user);
     void registerUser(User user);
     User getCurrentUser();
-
 }

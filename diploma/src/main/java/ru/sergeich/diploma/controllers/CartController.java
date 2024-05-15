@@ -58,7 +58,7 @@ public class CartController {
         model.addAttribute("cart", updatedCart);
         log.info("Model cart: {}", model.getAttribute("cart"));
         
-        return "cart";
+        return "redirect:/cart";
     }
 
     @GetMapping("/cart/order")

@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.sergeich.diploma.services.UserService;
-import ru.sergeich.diploma.services.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
