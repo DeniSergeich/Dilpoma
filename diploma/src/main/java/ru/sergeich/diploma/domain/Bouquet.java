@@ -8,7 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @Data
-@Entity(name = "bouquet")
+@Entity
 @Table(name = "bouquets")
 public class Bouquet {
     @Id

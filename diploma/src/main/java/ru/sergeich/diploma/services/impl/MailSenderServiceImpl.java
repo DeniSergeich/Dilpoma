@@ -34,9 +34,9 @@ public class MailSenderServiceImpl implements MailSenderService {
         final String[] body = {"Спасибо за Ваш заказ в нашем магазине.\nВаш заказ: \n"};
         Map<Bouquet, Long> bouquetsMap = user.getCart().getBouquets().stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        bouquetsMap.forEach((key, value) -> body[0] += key.getName()
-                + " | " + value + " | " + key.getPrice() + " руб."
-                + (value*key.getPrice() != key.getPrice() ? " ("+value*key.getPrice()
+        bouquetsMap.forEach((bouquet, amount) -> body[0] += bouquet.getName()
+                + " | " + amount + " | " + bouquet.getPrice() + " руб."
+                + (amount*bouquet.getPrice() != bouquet.getPrice() ? " ("+amount*bouquet.getPrice()
                 + " руб.)\n" : "\n"));
         body[0] += "Итого: " + user.getCart().getTotalPrice() + " руб.";
         return body[0];

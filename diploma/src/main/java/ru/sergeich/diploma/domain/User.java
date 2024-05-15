@@ -10,29 +10,22 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
-@Entity(name = "user")
+@Entity
 @Table(name = "users")
 @Data
 @AllArgsConstructor
 public class User implements UserDetails {
-
-
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private long id;
-
     private String username;
-
     private String password;
-
     @Transient
     private String passwordConfirm;
     private String email;
-
     @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Order> orders;
 
@@ -75,12 +68,6 @@ public class User implements UserDetails {
         return null;
     }
 
-    public int getBCount(Long bouquetId) {
-        return (int) cart.getBouquets().stream().filter(b -> b.getId() == bouquetId).count();
-    }
-    public int getAllTotalCost(){
-        return (int) cart.getBouquets().stream().mapToDouble(Bouquet::getPrice).sum();
-    }
     @Override
     public String toString() {
         return "User{" +
