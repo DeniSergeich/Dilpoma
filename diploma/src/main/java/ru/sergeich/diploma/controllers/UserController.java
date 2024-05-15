@@ -59,9 +59,9 @@ public class UserController {
      */
     @PostMapping("/lk-username")
     public String confirmUsername(@ModelAttribute("username") String username, Model model) {
-        if (username.length() < 1){
+        if (username.length() < 3){
             model.addAttribute("errorSetting", true);
-            model.addAttribute("message", "Имя пользователя не может быть пустым.");
+            model.addAttribute("message", "Имя пользователя не может быть менее трех символов.");
             return "lk";
         }
         else if (userService.findUserByUsername(username) != null){
