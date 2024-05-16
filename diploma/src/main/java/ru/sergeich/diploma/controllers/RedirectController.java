@@ -60,5 +60,4 @@ public class RedirectController {
     public String redirect() {
         return "redirect:/shop";
     }
-
 }
