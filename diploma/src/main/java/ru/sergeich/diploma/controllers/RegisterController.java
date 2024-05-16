@@ -20,7 +20,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class RegisterController {
 
-
     private final UserService userService;
 
     /**

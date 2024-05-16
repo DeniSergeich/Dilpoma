@@ -1,6 +1,7 @@
 package ru.sergeich.diploma.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Objects;
 @Data
 @Entity
 @Table(name = "carts")
+@NoArgsConstructor
 public class Cart {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -30,10 +32,6 @@ public class Cart {
     public Cart(User user) {
         this.user = user;
         this.bouquets = new ArrayList<>();
-    }
-
-    public Cart() {
-
     }
 
     public int countBouquetsById(Long bouquetId) {
@@ -63,5 +61,4 @@ public class Cart {
     public int hashCode() {
         return Objects.hash(id);
     }
-
 }

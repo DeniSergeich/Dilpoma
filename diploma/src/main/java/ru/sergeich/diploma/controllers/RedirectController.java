@@ -60,16 +60,4 @@ public class RedirectController {
     public String redirect() {
         return "redirect:/shop";
     }
-    @GetMapping("/referer")
-    public String referer(@RequestParam(required = false) String referer, HttpServletRequest request) {
-        if (referer != null) {
-            // Redirect to the previous URL if available
-            return "redirect:" + referer;
-        } else {
-            // Redirect to the default URL if no previous URL is available
-            return "redirect:/shop";
-        }
-    }
-
-
 }

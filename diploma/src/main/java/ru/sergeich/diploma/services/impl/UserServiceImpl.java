@@ -18,7 +18,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
     private final UserRepository userRepository;
 
     /**

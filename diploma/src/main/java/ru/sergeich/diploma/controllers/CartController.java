@@ -24,43 +24,52 @@ import java.util.stream.Collectors;
 public class CartController {
 
     private final CartService cartService;
-
     private final UserService userService;
-
     private final OrderService orderService;
-
     private final MailSenderService mailSenderService;
 
+   /**
+     * Извлекает корзину пользователя и связанные с ней букеты, обновляет атрибуты модели и возвращает имя представления «корзина».
+     *
+     * @param user — аутентифицированный пользователь
+     * @param model модель для добавления атрибутов
+     * @return представление cart
+     */
     @GetMapping("/cart")
     public String getCart(@AuthenticationPrincipal User user, Model model) {
-
     updateUserCart(user);
     Cart cart = cartService.getCartById(user.getCart().getId());
     log.info("Cart: {} User: {}", cart.getId(), user.getId());
-
     Map<Bouquet, Long> bouquetsMap = cart.getBouquets().stream()
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-
     model.addAttribute("bouquets", bouquetsMap);
     model.addAttribute("cart", cart);
-
         return "cart";
-
     }
 
-
-
+    /**
+     * Очищает корзину текущего пользователя.
+     *
+     * @param user аутентифицированный пользователь
+     * @param model описание параметра
+     * @return возвращает редирект на cart
+     */
     @GetMapping("/cart/clear")
     public String clearCart(@AuthenticationPrincipal User user,Model model) {
         cartService.clearCart(user.getCart().getId());
         Cart updatedCart = cartService.getCartById(user.getCart().getId());
         model.addAttribute("cart", updatedCart);
         log.info("Model cart: {}", model.getAttribute("cart"));
-        
         return "redirect:/cart";
     }
 
+    /**
+     * Создает заказ и отправляет письмо пользователю. Очищает корзину
+     *
+     * @param user аутентифицированный пользователь
+     * @param redirectAttributes атрибуты редиректа
+     * @return возвращает редирект на cart
+     */
     @GetMapping("/cart/order")
     public String orderCart(@AuthenticationPrincipal User user, RedirectAttributes redirectAttributes) {
         Order order = orderService.createOrder(user);
@@ -73,6 +82,11 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    /**
+     * Присваивает пользователю новую корзину.
+     *
+     * @param user аутентифицированный пользователь
+     */
     private void updateUserCart(User user) {
         if (user.getCart() == null) {
             log.info("User's cart is null");

@@ -40,16 +40,13 @@ public class ShopController {
     @GetMapping("/shop")
     public String getShop(@AuthenticationPrincipal User user, Model model) {
         if (user != null ) {
-
             updateUserCart(user);
             Cart cart = cartService.getCartById(user.getCart().getId());
             log.info("Cart: {} User: {}", cart.getId(), user.getId());
             model.addAttribute("cart", cart);
         }
-
         List<Bouquet> bouquets = bouquetService.getAllBouquets();
         model.addAttribute("bouquets", bouquets);
-
         return (user != null) ? "shop" : "shop-unregistered";
     }
 

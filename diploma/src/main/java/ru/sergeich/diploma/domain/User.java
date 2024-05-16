@@ -75,8 +75,4 @@ public class User implements UserDetails {
                 ", username='" + username + '\''+
                 '}';
     }
-
-
-
-
 }

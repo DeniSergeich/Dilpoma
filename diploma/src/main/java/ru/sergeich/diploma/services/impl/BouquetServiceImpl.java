@@ -13,7 +13,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BouquetServiceImpl implements BouquetService {
 
-
     private final BouquetRepository bouquetRepository;
 
     /**
@@ -22,7 +21,6 @@ public class BouquetServiceImpl implements BouquetService {
      * @return букет
      */
     public Optional<Bouquet> getBouquetById(Long bouquetId) {
-
         return bouquetRepository.findById(bouquetId);
     }
 
@@ -59,6 +57,4 @@ public class BouquetServiceImpl implements BouquetService {
     public void deleteBouquet(Long id) {
         bouquetRepository.deleteById(id);
     }
-
-
 }
