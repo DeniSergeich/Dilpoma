@@ -17,7 +17,6 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final AuthService authService;
-
     private final OrderRepository orderRepository;
 
     public Order createOrder(User user) {

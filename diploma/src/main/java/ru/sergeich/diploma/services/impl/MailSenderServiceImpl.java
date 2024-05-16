@@ -26,7 +26,6 @@ public class MailSenderServiceImpl implements MailSenderService {
         message.setSubject("Ваш заказ № " + subject  + " выполнен");
         message.setText(text);
         message.setFrom("tsvetochki.mag@yandex.ru");
-
         mailSender.send(message);
     }
 
